@@ -1,30 +1,17 @@
+/** React */
 import React, { Component } from 'react';
+
+/** Redux */
+import { connect } from 'react-redux';
+import { addTodo } from '../../redux/actions';
 
 class TodoForm extends Component {
 
   constructor(props) {
     super(props);
+
     /** Define os states */
     this.state = { input: '' };
-
-    /** Associa o objeto this nos métodos do componente */
-    this.submit = this.submit.bind(this);
-    this.onInput = this.onInput.bind(this);
-    this.onKeypress = this.onKeypress.bind(this);
-  }
-
-  /**
-   * todo
-   * ---
-   * Retorna um novo Objeto tarefa com um dado título.
-   * 
-   * @param {String} title Título da tarefa
-   */
-  todo(title) {
-    return {
-      title: title,
-      isComplete: false
-    }
   }
 
   /**
@@ -37,9 +24,7 @@ class TodoForm extends Component {
   submit() {
     if(! this.state.input) return;
 
-    this.props.onSubmit(
-      this.todo( this.state.input )
-    );
+    this.props.addTodo(this.state.input);
 
     this.setState({ input: '' });
   }
@@ -76,10 +61,10 @@ class TodoForm extends Component {
     return (
       <input
         type="text"
-        onInput={this.onInput}
         value={this.state.input}
         className="todos-form__input"
-        onKeyPress={this.onKeypress}
+        onInput={(e) => this.onInput(e)}
+        onKeyPress={(e) => this.onKeypress(e)}
         placeholder={this.props.placeholder}
       />
     );
@@ -87,4 +72,4 @@ class TodoForm extends Component {
 
 }
 
-export default TodoForm;
+export default connect( null, { addTodo } )( TodoForm );

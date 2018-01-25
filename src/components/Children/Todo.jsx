@@ -1,15 +1,14 @@
+/** React */
 import React, { Component } from 'react';
 
+/** Redux */
+import { connect } from 'react-redux';
+import { destroyTodo, toggleTodo } from '../../redux/actions';
+
+/** Componentes filhos */
 import DeleteIcon from './DeleteIcon.jsx';
 
 class Todo extends Component {
-
-  constructor(props) {
-    super(props);
-    /** Associa o objeto this nos métodos do componente */
-    this.destroy = this.destroy.bind(this);
-    this.complete = this.complete.bind(this);
-  }
 
   /**
    * complete
@@ -19,7 +18,7 @@ class Todo extends Component {
    * à qual é passado o Objeto tarefa a ser modificado.
    */
   complete() {
-    this.props.complete( this.props.item );
+    this.props.toggleTodo( this.props.item.id );
   }
 
   /**
@@ -30,16 +29,16 @@ class Todo extends Component {
    * à qual é passado o Objeto tarefa a ser destruído
    */
   destroy() {
-    this.props.destroy( this.props.item );
+    this.props.destroyTodo(this.props.item.id);
   }
 
   /** render */
   render() {
-    const item = this.props.item;
+    const { item } = this.props;
 
     return (
       <div className="todos-todo">
-        <h2 onClick={this.complete}
+        <h2 onClick={() => this.complete()}
             className={item.isComplete ? "todos-todo__title complete" : "todos-todo__title"}>
           {
             (item.isComplete)
@@ -47,7 +46,7 @@ class Todo extends Component {
               : <span>{item.title}</span>
           }
         </h2>
-        <button className="todos-todo__destroy" onClick={this.destroy}>
+        <button className="todos-todo__destroy" onClick={() => this.destroy()}>
           <DeleteIcon />
         </button>
       </div>
@@ -56,4 +55,11 @@ class Todo extends Component {
 
 }
 
-export default Todo;
+export default connect(
+  state => {
+    return {
+      list: state.list
+    }
+  },
+  { destroyTodo, toggleTodo }
+)( Todo );

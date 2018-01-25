@@ -1,15 +1,33 @@
+/** React */
 import React from 'react';
+
+/** Redux */
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import Reducers from '../../redux/reducers';
+
+/** Components filhos */
 import Todos from '../Todos';
+
+/** Outros */
 import { isString } from 'util';
 
 describe('<Todos />', () => {
   /**
-   * Montar o component antes de cada teste
+   * > Limpar localStorage
+   * > Criar nova Store
+   * > Montar o component antes de cada teste
    */
+  let store;
   let wrapper;
   beforeEach(() => {
     localStorage.clear();
-    wrapper = mount(<Todos />);
+    store = createStore( Reducers );
+    wrapper = mount(
+      <Provider store={store}>
+        <Todos />
+      </Provider>
+    );
   });
 
   it('sees a title', () => {

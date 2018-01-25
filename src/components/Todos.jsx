@@ -1,149 +1,17 @@
-import Storage from '../StorageWrapper';
+/** React */
 import React, { Component } from 'react';
 
-/** Components filhos */
+/** Redux */
+import { connect } from 'react-redux';
+import { setTodosFilter, setTodosOrder } from '../redux/actions';
+
+/** Componentes filhos */
 import Todo from './Children/Todo.jsx';
 import Form from './Children/TodoForm.jsx';
+import OrderTodos from './Children/OrderTodos.jsx';
+import FilterTodos from './Children/FilterTodos.jsx';
 
 class Todos extends Component {
-
-  constructor(props) {
-    super(props);
-    /** Inicializa o wrapper do localStorage */
-    this.storage = new Storage('todos');
-    this.orderByStorage = new Storage('orderBy');
-
-    /** Define os states */
-    this.state = {
-      order: this.orderByStorage.get() || 'ASC',
-      filter: 'all',
-      list: this.storage.get() || []
-    };
-
-    /** Associa o objeto this nos métodos do componente */
-    this.addTodo = this.addTodo.bind(this);
-    this.destroyItem = this.destroyItem.bind(this);
-    this.completeItem = this.completeItem.bind(this);
-  }
-
-  /**
-   * addTodo
-   * ---
-   * Adiciona um novo objeto tarefa à lista de tarefas.
-   * 
-   * @param {Object}  todo Objeto tarefa
-   */
-  addTodo(todo) {
-    let list = this.state.list;
-    list.push(todo);
-
-    this.storage.set(list);
-    this.setState({ list });
-  }
-
-  /**
-   * completeItem
-   * ---
-   * Inverte o estado de uma tarefa entre completa e não-completa.
-   * 
-   * @param {Object}  completedItem  Objeto tarefa
-   */
-  completeItem(completedItem) {
-    let list = this.state.list.map(item => {
-      if (item === completedItem) {
-        item.isComplete = !item.isComplete;
-      }
-
-      return item;
-    });
-
-    this.storage.set(list);
-    this.setState({ list });
-  }
-
-  /**
-   * destroyItem
-   * ---
-   * Remove uma tarefa da lista de tarefas e salva a lista no storage.
-   * 
-   * @param {Object}  destroidItem  Objeto tarefa
-   */
-  destroyItem(destroidItem) {
-    let list = this.state.list.filter(item => item !== destroidItem);
-
-    this.storage.set(list);
-    this.setState({ list });
-  }
-
-  /**
-   * orderBy
-   * ---
-   * Ordena as tarefa de pela ordem de adição e salva a lista no storage.
-   * 
-   * @param {String}  order Direção de ordenação ( ASC|DESC )
-   */
-  orderBy(order) {
-    if (order === this.state.order) return;
-
-    let list = this.state.list;
-    list.reverse();
-
-    this.setState({ list, order });
-    this.storage.set(list);
-    this.orderByStorage.set(order);
-  }
-
-  /**
-   * filterBy
-   * ---
-   * Altera o state 'filter'.
-   * 
-   * @param {String}  filter  Nome do filtro
-   */
-  filterBy(filter) {
-    if (filter === this.state.filter) return;
-
-    this.setState({ filter });
-  }
-
-  /**
-   * filter
-   * ---
-   * Filtra os ítens de acordo com o estado 'filter'.
-   *
-   * @param   {Array} list  Lista de tarefas
-   * @returns {Array} Lista filtrada de tarefas
-   */
-  filter(list) {
-    return list.filter(item => {
-      /** Retorna todas as tarefas */
-      if (this.state.filter === 'all') {
-        return true;
-      }
-
-      /** Retorna as tarefas completadas */
-      if (this.state.filter === 'completed') {
-        return item.isComplete;
-      }
-
-      /** Retorna as tarefas não completadas */
-      if (this.state.filter === 'incomplete') {
-        return !item.isComplete;
-      }
-    });
-  }
-
-  /**
-   * list
-   * ---
-   * Aplica o filtro na lista de tarefas e retorna uma Array
-   * com os ítens que devem ser exibidos.
-   * 
-   * @returns {Array} Lista filtrada de tarefas
-   */
-  list() {
-    return this.filter(this.state.list);
-  }
 
   /** render */
   render() {
@@ -154,58 +22,23 @@ class Todos extends Component {
         
         {/* Formulário */}
         <div className="todos-form">
-          <Form onSubmit={this.addTodo} placeholder="Adicionar nova tarefa" />
+          <Form placeholder="Adicionar nova tarefa" />
         </div>
 
         {/* Header */}
         <div className="todos-header">
           {/* Filtrar lista */}
-          <div className="todos-filterBy">
-            <div>Exibir:</div>
-            {/* Mostrar todas as tarefas */}
-            <button onClick={() => this.filterBy('all')}
-                    className={(this.state.filter==='all') ? 'todos-filterBy__button todos-filterBy__all active' : 'todos-filterBy__button todos-filterBy__all'}>
-              Todas
-            </button>
-            {/* Mostrar tarefas completadas */}
-            <button onClick={() => this.filterBy('completed')}
-                    className={(this.state.filter==='completed') ? 'todos-filterBy__button todos-filterBy__completed active' : 'todos-filterBy__button todos-filterBy__completed'}>
-              Completadas
-            </button>
-            {/* Mostrar tarefas não completadas */}
-            <button onClick={() => this.filterBy('incomplete')}
-                    className={(this.state.filter==='incomplete') ? 'todos-filterBy__button todos-filterBy__incomplete active' : 'todos-filterBy__button todos-filterBy__incomplete'}>
-              Não completadas
-            </button>
-          </div>
+          <FilterTodos />
         
           {/* Ordernar lista */}
-          <div className="todos-orderBy">
-
-            {/* Mais recentes */}
-            <button onClick={() => this.orderBy('DESC')}
-                    className={(this.state.order==='DESC') ? 'todos-orderBy__button todos-orderBy__desc active' : 'todos-orderBy__button todos-orderBy__desc'}>
-              Mais recentes
-            </button>
-
-            {/* Mais antigas */}
-            <button onClick={() => this.orderBy('ASC')}
-                    className={(this.state.order==='ASC') ? 'todos-orderBy__button todos-orderBy__asc active' : 'todos-orderBy__button todos-orderBy__asc'}>
-              Mais antigas
-            </button>
-          </div>
+          <OrderTodos />
         </div>
         
         {/* Lista de tarefas */}
         <div className="todos-items">
-          {this.list().map((item, key) => {
+          {this.props.filtered.map(item => {
             return (
-              <Todo
-                item={item}
-                key={`todo-${key}`}
-                destroy={this.destroyItem}
-                complete={this.completeItem}
-              />
+              <Todo item={item} key={`todo-${item.id}`} />
             );
           })}
         </div>
@@ -215,4 +48,14 @@ class Todos extends Component {
 
 }
 
-export default Todos;
+export default connect(
+  state => {
+    return {
+      list: state.list,
+      order: state.order,
+      filter: state.filter,
+      filtered: state.filtered
+    }
+  },
+  { setTodosFilter, setTodosOrder }
+)( Todos );
