@@ -1,4 +1,4 @@
-.todos\:orderBy {
+.todos-orderBy {
   
   & {
     display: flex;
@@ -8,13 +8,13 @@
     border-left: 1px solid $grey;
   }
 
-  &-button {
+  &__button {
     font-size: $font-size-sm;
     padding: .5rem; 
     margin: 0 .8rem;
   }
 
-  &-button.active {
+  &__button.active {
     font-weight: bold;
     background-color: $primary-lightest;
     color: $white;

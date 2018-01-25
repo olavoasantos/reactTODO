@@ -1,4 +1,4 @@
-.todos\:todo {
+.todos-todo {
   & {
     display: flex;
     align-items: center;
@@ -9,7 +9,7 @@
     background-color: $grey-lightest
   }
 
-  &-destroy {
+  &__destroy {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,11 +26,11 @@
     }
   }
 
-  &-destroy:hover {
+  &__destroy:hover {
     background-color: $red-light;
   }
 
-  &-title {
+  &__title {
     flex:1;
     height: 100%;
     cursor: pointer;
@@ -39,7 +39,7 @@
     margin: 0;
   }
 
-  &-title.complete {
+  &__title.complete {
     color: $grey;
     text-decoration: line-through
   }

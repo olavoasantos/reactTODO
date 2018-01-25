@@ -18335,9 +18335,7 @@ var Todos = function (_Component) {
     _this.state = {
       order: _this.orderByStorage.get() || 'ASC',
       filter: 'all',
-      list: _this.storage.get() || [
-      // Exmplo de tarefas
-      { title: 'Buscar empregos', isComplete: true }, { title: 'Encontrar uma empresa de excelência', isComplete: true }, { title: 'Enviar currículo', isComplete: true }, { title: 'Receber ligação', isComplete: true }, { title: 'Ficar muito animado =x', isComplete: true }, { title: 'Receber desafio', isComplete: true }, { title: 'Programar por muitas horas', isComplete: true }, { title: 'Finalizar e enviar desafio', isComplete: true }, { title: 'Ficar na expectativa de ser chamado para a entrevista', isComplete: true }, { title: 'Ser chamado para a entrevista', isComplete: false }, { title: 'Ser contratado pele empresa de excelência', isComplete: false }]
+      list: _this.storage.get() || []
     };
 
     /** Associa o objeto this nos métodos do componente */
@@ -18504,20 +18502,20 @@ var Todos = function (_Component) {
         { className: 'todos' },
         _react2.default.createElement(
           'h1',
-          { className: 'todos:title' },
+          { className: 'todos-title' },
           'iTarefas'
         ),
         _react2.default.createElement(
           'div',
-          { className: 'todos:form' },
+          { className: 'todos-form' },
           _react2.default.createElement(_TodoForm2.default, { onSubmit: this.addTodo, placeholder: 'Adicionar nova tarefa' })
         ),
         _react2.default.createElement(
           'div',
-          { className: 'todos:header' },
+          { className: 'todos-header' },
           _react2.default.createElement(
             'div',
-            { className: 'todos:filterBy' },
+            { className: 'todos-filterBy' },
             _react2.default.createElement(
               'div',
               null,
@@ -18528,7 +18526,7 @@ var Todos = function (_Component) {
               { onClick: function onClick() {
                   return _this3.filterBy('all');
                 },
-                className: this.state.filter === 'all' ? 'todos:filterBy-button active' : 'todos:filterBy-button' },
+                className: this.state.filter === 'all' ? 'todos-filterBy__button todos-filterBy__all active' : 'todos-filterBy__button todos-filterBy__all' },
               'Todas'
             ),
             _react2.default.createElement(
@@ -18536,7 +18534,7 @@ var Todos = function (_Component) {
               { onClick: function onClick() {
                   return _this3.filterBy('completed');
                 },
-                className: this.state.filter === 'completed' ? 'todos:filterBy-button active' : 'todos:filterBy-button' },
+                className: this.state.filter === 'completed' ? 'todos-filterBy__button todos-filterBy__completed active' : 'todos-filterBy__button todos-filterBy__completed' },
               'Completadas'
             ),
             _react2.default.createElement(
@@ -18544,19 +18542,19 @@ var Todos = function (_Component) {
               { onClick: function onClick() {
                   return _this3.filterBy('incomplete');
                 },
-                className: this.state.filter === 'incomplete' ? 'todos:filterBy-button active' : 'todos:filterBy-button' },
+                className: this.state.filter === 'incomplete' ? 'todos-filterBy__button todos-filterBy__incomplete active' : 'todos-filterBy__button todos-filterBy__incomplete' },
               'N\xE3o completadas'
             )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'todos:orderBy' },
+            { className: 'todos-orderBy' },
             _react2.default.createElement(
               'button',
               { onClick: function onClick() {
                   return _this3.orderBy('DESC');
                 },
-                className: this.state.order === 'DESC' ? 'todos:orderBy-button active' : 'todos:orderBy-button' },
+                className: this.state.order === 'DESC' ? 'todos-orderBy__button todos-orderBy__desc active' : 'todos-orderBy__button todos-orderBy__desc' },
               'Mais recentes'
             ),
             _react2.default.createElement(
@@ -18564,14 +18562,14 @@ var Todos = function (_Component) {
               { onClick: function onClick() {
                   return _this3.orderBy('ASC');
                 },
-                className: this.state.order === 'ASC' ? 'todos:orderBy-button active' : 'todos:orderBy-button' },
+                className: this.state.order === 'ASC' ? 'todos-orderBy__button todos-orderBy__asc active' : 'todos-orderBy__button todos-orderBy__asc' },
               'Mais antigas'
             )
           )
         ),
         _react2.default.createElement(
           'div',
-          { className: 'todos:items' },
+          { className: 'todos-items' },
           this.list().map(function (item, key) {
             return _react2.default.createElement(_Todo2.default, {
               item: item,
@@ -18741,11 +18739,11 @@ var Todo = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'todos:todo' },
+        { className: 'todos-todo' },
         _react2.default.createElement(
           'h2',
           { onClick: this.complete,
-            className: item.isComplete ? "todos:todo-title complete" : "todos:todo-title" },
+            className: item.isComplete ? "todos-todo__title complete" : "todos-todo__title" },
           item.isComplete ? _react2.default.createElement(
             'del',
             null,
@@ -18758,7 +18756,7 @@ var Todo = function (_Component) {
         ),
         _react2.default.createElement(
           'button',
-          { className: 'todos:todo-destroy', onClick: this.destroy },
+          { className: 'todos-todo__destroy', onClick: this.destroy },
           _react2.default.createElement(_DeleteIcon2.default, null)
         )
       );
@@ -18810,7 +18808,7 @@ var DeleteIcon = function (_Component) {
     /** render */
     value: function render() {
       return _react2.default.createElement("img", { alt: "Deletar",
-        className: "todos:todo-destroy--icon",
+        className: "todos-todo__destroy--icon",
         src: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjEzNCAtMjMxLjUgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAxMzQgLTIzMS41IDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yMjMuNC0xMzEuNWwyNi4yLDM0Ny45YzIuNSwzMi41LDI5LjYsNTguMSw2MC43LDU4LjFoMTU5LjNjMzEuMSwwLDU4LjItMjUuNiw2MC43LTU4LjFsMjYuMy0zNDcuOUgyMjMuNHoNCgkgTTMyNC4xLDIyOS4zYzAuMyw3LjEtNS4xLDEyLjctMTIsMTIuN3MtMTIuNy01LjctMTMuMS0xMi43TDI4NC40LTY3LjNjLTAuNS05LjYsNS43LTE3LjQsMTMuOC0xNy40YzguMSwwLDE0LjksNy44LDE1LjMsMTcuNA0KCUwzMjQuMSwyMjkuM3ogTTQwMi41LDIyOS4zYzAsNy4xLTUuNywxMi43LTEyLjUsMTIuN3MtMTIuNS01LjctMTIuNS0xMi43bC0yLTI5Ni42Yy0wLjEtOS42LDYuNC0xNy40LDE0LjUtMTcuNHMxNC42LDcuOCwxNC41LDE3LjQNCglMNDAyLjUsMjI5LjN6IE00ODAuOSwyMjkuM2MtMC4zLDcuMS02LjIsMTIuNy0xMy4xLDEyLjdzLTEyLjItNS43LTEyLTEyLjdsMTAuNi0yOTYuNmMwLjMtOS42LDcuMi0xNy40LDE1LjMtMTcuNA0KCWM4LjEsMCwxNC4zLDcuOCwxMy44LDE3LjRMNDgwLjksMjI5LjN6Ii8+DQo8cGF0aCBpZD0iWE1MSURfMl8iIGNsYXNzPSJzdDAiIGQ9Ik01NzkuMy0xNDguN0gyMDAuN2wwLDBjLTEuOC0yMS4xLDEwLjctMzguNCwyNy45LTM4LjRoMzIyLjkNCglDNTY4LjYtMTg3LjEsNTgxLjEtMTY5LjcsNTc5LjMtMTQ4LjdMNTc5LjMtMTQ4Ljd6Ii8+DQo8cGF0aCBpZD0iWE1MSURfMV8iIGNsYXNzPSJzdDAiIGQ9Ik00NTguMy0xNzIuOUgzMjEuN2wtMC4yLTcuOGMtMC44LTI0LjUsMTQuNi00NC44LDM0LjQtNDQuOGg2OC4zYzE5LjcsMCwzNS4xLDIwLjMsMzQuNCw0NC43DQoJTDQ1OC4zLTE3Mi45eiIvPg0KPC9zdmc+DQo=" });
     }
   }]);
@@ -18941,7 +18939,7 @@ var TodoForm = function (_Component) {
         type: 'text',
         onInput: this.onInput,
         value: this.state.input,
-        className: 'todos:form-input',
+        className: 'todos-form__input',
         onKeyPress: this.onKeypress,
         placeholder: this.props.placeholder
       });

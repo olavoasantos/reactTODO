@@ -78,7 +78,7 @@ class TodoForm extends Component {
         type="text"
         onInput={this.onInput}
         value={this.state.input}
-        className="todos:form-input"
+        className="todos-form__input"
         onKeyPress={this.onKeypress}
         placeholder={this.props.placeholder}
       />

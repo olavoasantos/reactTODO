@@ -7,8 +7,7 @@
   "scripts": {
     "build": "webpack",
     "serve": "webpack-dev-server",
-    "deploy": "npm run build && gh-pages -d dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config test/jest.config.js"
   },
   "author": {
     "name": "Olavo Amorim Santos",
@@ -21,15 +20,21 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.9",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "gh-pages": "^1.1.0",
     "html-webpack-plugin": "^2.30.1",
+    "jest": "^22.1.4",
     "node-sass": "^4.7.2",
     "path": "^0.12.7",
+    "react-test-renderer": "^16.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
