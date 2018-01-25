@@ -1,0 +1,258 @@
+/**
+ *  Todos Variables
+ */
+/**
+  * Font families
+  */
+/**
+  * Font sizes
+  */
+/** 
+   *  Max mobile screen width
+   *  Baseado no Bootstrap 4
+   */
+/**
+   *  Cores
+   */
+/* ----------------------------------------------------------------------------------------------------
+Super Form Reset
+https://gist.github.com/anthonyshort/552543
+A couple of things to watch out for:
+- IE8: If a text input doesn't have padding on all sides or none the text won't be centered.
+- The default border sizes on text inputs in all UAs seem to be slightly different. You're better off using custom borders.
+- You NEED to set the font-size and family on all form elements
+- Search inputs need to have their appearance reset and the box-sizing set to content-box to match other UAs
+- You can style the upload button in webkit using ::-webkit-file-upload-button
+- ::-webkit-file-upload-button selectors can't be used in the same selector as normal ones. FF and IE freak out.
+- IE: You don't need to fake inline-block with labels and form controls in IE. They function as inline-block.
+- By turning off ::-webkit-search-decoration, it removes the extra whitespace on the left on search inputs
+----------------------------------------------------------------------------------------------------*/
+input,
+label,
+select,
+button,
+textarea {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: normal;
+  background: none;
+  line-height: 1;
+  /* Browsers have different default form fonts */
+  font-size: 1rem;
+  font-family: Arial; }
+
+/* Remove the stupid outer glow in Webkit */
+input:focus {
+  outline: 0; }
+
+/* Box Sizing Reset
+-----------------------------------------------*/
+/* All of our custom controls should be what we expect them to be */
+input,
+textarea {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box; }
+
+/* These elements are usually rendered a certain way by the browser */
+button,
+input[type=reset],
+input[type=button],
+input[type=submit],
+input[type=checkbox],
+input[type=radio],
+select {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* Button Controls
+-----------------------------------------------*/
+input[type=checkbox],
+input[type=radio] {
+  width: 13px;
+  height: 13px; }
+
+/* File Uploads
+-----------------------------------------------*/
+/* Search Input
+-----------------------------------------------*/
+/* Make webkit render the search input like a normal text field */
+input[type=search] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box; }
+
+/* Turn off the recent search for webkit. It adds about 15px padding on the left */
+::-webkit-search-decoration {
+  display: none; }
+
+/* Buttons
+-----------------------------------------------*/
+button,
+input[type="reset"],
+input[type="button"],
+input[type="submit"] {
+  /* Fix IE7 display bug */
+  overflow: visible;
+  width: auto; }
+
+/* IE8 and FF freak out if this rule is within another selector */
+::-webkit-file-upload-button {
+  padding: 0;
+  border: 0;
+  background: none; }
+
+/* Textarea
+-----------------------------------------------*/
+textarea {
+  /* Move the label to the top */
+  vertical-align: top;
+  /* Turn off scroll bars in IE unless needed */
+  overflow: auto; }
+
+/* Selects
+-----------------------------------------------*/
+select[multiple] {
+  /* Move the label to the top */
+  vertical-align: top; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  font-family: "Open Sans", sans; }
+
+.todos {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  max-width: 50%;
+  margin: 0 auto;
+  min-width: 700px; }
+
+@media (max-width: 767.98px) {
+  .todos {
+    max-width: 95%;
+    width: 95%; } }
+
+.todos\:title {
+  text-align: center;
+  font-family: "Patua One", cursive;
+  margin: 1rem auto;
+  font-size: 4rem; }
+
+.todos\:form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem; }
+
+.todos\:form-input {
+  width: 100%;
+  padding: 1rem;
+  margin: 0 1rem;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  border: 1px solid #ccc; }
+
+.todos\:form-input:hover {
+  border-color: #ddd; }
+
+.todos\:form-input:focus {
+  border-color: #2e81d3; }
+
+.todos\:header {
+  display: flex;
+  padding: 1rem;
+  margin: 0 1rem;
+  font-size: 0.8rem;
+  justify-content: space-between;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ddd;
+  background-color: #eee; }
+
+.todos\:filterBy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem; }
+
+.todos\:filterBy-button {
+  font-size: 0.8rem;
+  padding: .5rem;
+  margin: 0 .8rem; }
+
+.todos\:filterBy-button.active {
+  font-weight: bold;
+  background-color: #2e81d3;
+  color: #fafafa; }
+
+.todos\:orderBy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  border-left: 1px solid #ccc; }
+
+.todos\:orderBy-button {
+  font-size: 0.8rem;
+  padding: .5rem;
+  margin: 0 .8rem; }
+
+.todos\:orderBy-button.active {
+  font-weight: bold;
+  background-color: #2e81d3;
+  color: #fafafa; }
+
+.todos\:items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 1rem;
+  border: 1px solid #ddd;
+  border-bottom-left-radius: .25rem;
+  border-bottom-right-radius: .25rem; }
+
+.todos\:todo {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #eee; }
+
+.todos\:todo:hover {
+  background-color: #f5f5f5; }
+
+.todos\:todo-destroy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 2rem;
+  background: red;
+  color: white;
+  margin-right: 1rem;
+  border-radius: .25rem;
+  cursor: pointer; }
+  .todos\:todo-destroy--icon {
+    height: 1rem; }
+
+.todos\:todo-destroy:hover {
+  background-color: #ff6666; }
+
+.todos\:todo-title {
+  flex: 1;
+  height: 100%;
+  cursor: pointer;
+  user-select: none;
+  padding: 1rem;
+  margin: 0; }
+
+.todos\:todo-title.complete {
+  color: #ccc;
+  text-decoration: line-through; }

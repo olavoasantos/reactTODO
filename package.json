@@ -2,11 +2,12 @@
   "name": "itarefas",
   "version": "1.0.0",
   "description": "Simple TODO list built with React.js",
+  "homepage": "https://olavoasantos.github.io/itarefas",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
     "serve": "webpack-dev-server",
-    "deploy": "npm run build && gh-pages -d build",
+    "deploy": "npm run build && gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
