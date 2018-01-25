@@ -1,0 +1,22 @@
+.todos\:filterBy {
+  
+  & {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $font-size-sm;
+  }
+
+  &-button {
+    font-size: $font-size-sm;
+    padding: .5rem;
+    margin: 0 .8rem;
+  }
+
+  &-button.active {
+    font-weight: bold;
+    background-color: $primary-lightest;
+    color: $white;
+  }
+
+}

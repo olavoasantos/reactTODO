@@ -1,0 +1,10 @@
+.todos\:header {
+  display: flex;
+  padding: 1rem;
+  margin: 0 1rem;
+  font-size: $font-size-sm;
+  justify-content: space-between;
+  border-left: 1px solid $grey;
+  border-right: 1px solid $grey-light;
+  background-color: $grey-lighter;
+}

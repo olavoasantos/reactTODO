@@ -1,0 +1,9 @@
+/**
+ *  Configuração do VS Code
+ */
+
+{
+  "compilerOptions": {
+      "target": "ES6"
+  }
+}

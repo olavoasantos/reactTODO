@@ -1,0 +1,18 @@
+.todos {
+  
+  & {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    max-width: 50%;
+    margin: 0 auto;
+    min-width: 700px;
+  }
+
+  @media (max-width: $mobile) {
+    max-width: 95%;
+    width: 95%;
+  }
+
+}

@@ -1,0 +1,46 @@
+.todos\:todo {
+  & {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid $grey-lighter;
+  }
+
+  &:hover {
+    background-color: $grey-lightest
+  }
+
+  &-destroy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    width: 2rem;
+    background: $red;
+    color: white;
+    margin-right:1rem;
+    border-radius: .25rem;
+    cursor: pointer;
+
+    &--icon {
+      height: 1rem;
+    }
+  }
+
+  &-destroy:hover {
+    background-color: $red-light;
+  }
+
+  &-title {
+    flex:1;
+    height: 100%;
+    cursor: pointer;
+    user-select: none;
+    padding: 1rem;
+    margin: 0;
+  }
+
+  &-title.complete {
+    color: $grey;
+    text-decoration: line-through
+  }
+}

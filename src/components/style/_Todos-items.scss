@@ -1,0 +1,9 @@
+.todos\:items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 1rem;
+  border: 1px solid $grey-light;
+  border-bottom-left-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+}
