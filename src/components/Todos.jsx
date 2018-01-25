@@ -2,8 +2,8 @@ import Storage from '../StorageWrapper';
 import React, { Component } from 'react';
 
 /** Components filhos */
-import Todo from './Todo.jsx';
-import Form from './TodoForm.jsx';
+import Todo from './Children/Todo.jsx';
+import Form from './Children/TodoForm.jsx';
 
 class Todos extends Component {
 
@@ -17,20 +17,7 @@ class Todos extends Component {
     this.state = {
       order: this.orderByStorage.get() || 'ASC',
       filter: 'all',
-      list: this.storage.get() || [
-        // Exmplo de tarefas
-        {title: 'Buscar empregos', isComplete: true},
-        {title: 'Encontrar uma empresa de excelência', isComplete: true},
-        {title: 'Enviar currículo', isComplete: true},
-        {title: 'Receber ligação', isComplete: true},
-        {title: 'Ficar muito animado =x', isComplete: true},
-        {title: 'Receber desafio', isComplete: true},
-        {title: 'Programar por muitas horas', isComplete: true},
-        {title: 'Finalizar e enviar desafio', isComplete: true},
-        {title: 'Ficar na expectativa de ser chamado para a entrevista', isComplete: true},
-        {title: 'Ser chamado para a entrevista', isComplete: false},
-        {title: 'Ser contratado pele empresa de excelência', isComplete: false},
-      ]
+      list: this.storage.get() || []
     };
 
     /** Associa o objeto this nos métodos do componente */
@@ -163,54 +150,54 @@ class Todos extends Component {
     return (
       <div className="todos">
         {/* Título */}
-        <h1 className="todos:title">iTarefas</h1>
+        <h1 className="todos-title">iTarefas</h1>
         
         {/* Formulário */}
-        <div className="todos:form">
+        <div className="todos-form">
           <Form onSubmit={this.addTodo} placeholder="Adicionar nova tarefa" />
         </div>
 
         {/* Header */}
-        <div className="todos:header">
+        <div className="todos-header">
           {/* Filtrar lista */}
-          <div className="todos:filterBy">
+          <div className="todos-filterBy">
             <div>Exibir:</div>
             {/* Mostrar todas as tarefas */}
             <button onClick={() => this.filterBy('all')}
-                    className={(this.state.filter==='all') ? 'todos:filterBy-button active' : 'todos:filterBy-button'}>
+                    className={(this.state.filter==='all') ? 'todos-filterBy__button todos-filterBy__all active' : 'todos-filterBy__button todos-filterBy__all'}>
               Todas
             </button>
             {/* Mostrar tarefas completadas */}
             <button onClick={() => this.filterBy('completed')}
-                    className={(this.state.filter==='completed') ? 'todos:filterBy-button active' : 'todos:filterBy-button'}>
+                    className={(this.state.filter==='completed') ? 'todos-filterBy__button todos-filterBy__completed active' : 'todos-filterBy__button todos-filterBy__completed'}>
               Completadas
             </button>
             {/* Mostrar tarefas não completadas */}
             <button onClick={() => this.filterBy('incomplete')}
-                    className={(this.state.filter==='incomplete') ? 'todos:filterBy-button active' : 'todos:filterBy-button'}>
+                    className={(this.state.filter==='incomplete') ? 'todos-filterBy__button todos-filterBy__incomplete active' : 'todos-filterBy__button todos-filterBy__incomplete'}>
               Não completadas
             </button>
           </div>
         
           {/* Ordernar lista */}
-          <div className="todos:orderBy">
+          <div className="todos-orderBy">
 
             {/* Mais recentes */}
             <button onClick={() => this.orderBy('DESC')}
-                    className={(this.state.order==='DESC') ? 'todos:orderBy-button active' : 'todos:orderBy-button'}>
+                    className={(this.state.order==='DESC') ? 'todos-orderBy__button todos-orderBy__desc active' : 'todos-orderBy__button todos-orderBy__desc'}>
               Mais recentes
             </button>
 
             {/* Mais antigas */}
             <button onClick={() => this.orderBy('ASC')}
-                    className={(this.state.order==='ASC') ? 'todos:orderBy-button active' : 'todos:orderBy-button'}>
+                    className={(this.state.order==='ASC') ? 'todos-orderBy__button todos-orderBy__asc active' : 'todos-orderBy__button todos-orderBy__asc'}>
               Mais antigas
             </button>
           </div>
         </div>
         
         {/* Lista de tarefas */}
-        <div className="todos:items">
+        <div className="todos-items">
           {this.list().map((item, key) => {
             return (
               <Todo

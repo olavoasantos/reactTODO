@@ -1,4 +1,4 @@
-.todos\:form {
+.todos-form {
   
   & {
     display: flex;
@@ -8,7 +8,7 @@
     margin-top: 2rem;
   }
 
-  &-input {
+  &__input {
     width: 100%;
     padding: 1rem;
     margin: 0 1rem;
@@ -17,11 +17,11 @@
     border: 1px solid $grey;
   }
 
-  &-input:hover {
+  &__input:hover {
     border-color: $grey-light;
   }
 
-  &-input:focus {
+  &__input:focus {
     border-color: $primary-lightest;
   }
 

@@ -17,7 +17,7 @@ const htmlWebpackPluginConfig = new htmlWebpackPlugin({
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve('docs'),
     filename: 'index.js'
   },
 
