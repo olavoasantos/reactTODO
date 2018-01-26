@@ -14,14 +14,6 @@
     background-color: $primary-dark;
     border-bottom: 4px solid $primary-lightest;
     user-select: none;
-  }
-
-  /**
-   *  .todos-title
-   *  ---
-   *  Adaptação para telas menores.
-   */
-  @media (max-width: 700px) {
     text-align: center;
   }
 

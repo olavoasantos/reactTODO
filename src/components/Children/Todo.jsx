@@ -42,8 +42,8 @@ class Todo extends Component {
       <div className='todos-todo animated flipInX'>
 
         {/* Ícones de completo/não-completo */}
-        <span className={item.isComplete ? 'todos-todo__active' : 'todos-todo__inactive'}><TodoCompletedIcon /></span>
-        <span className={item.isComplete ? 'todos-todo__inactive' : 'todos-todo__active'}><TodoIncompleteIcon /></span>
+        <span onClick={() => this.complete()} className={item.isComplete ? 'todos-todo__active' : 'todos-todo__inactive'}><TodoCompletedIcon /></span>
+        <span onClick={() => this.complete()} className={item.isComplete ? 'todos-todo__inactive' : 'todos-todo__active'}><TodoIncompleteIcon /></span>
         
         {/* Título / botão de completar */}
         <h2 onClick={() => this.complete()}

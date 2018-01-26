@@ -59,6 +59,7 @@
     // .todos-filterBy__button.active
     &.active {
       opacity: 1;
+      color: $primary;
       border-color: $primary-lightest;
     }
   
