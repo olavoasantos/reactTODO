@@ -219,11 +219,6 @@ a:hover {
    *  .todos-title
    *  ---
    *  Estilo do título.
-   */
-  /**
-   *  .todos-title
-   *  ---
-   *  Adaptação para telas menores.
    */ }
   .todos-title {
     font-family: "Gloria Hallelujah", cursive;
@@ -232,10 +227,8 @@ a:hover {
     color: #fafafa;
     background-color: #2F365F;
     border-bottom: 4px solid #B2B7FF;
-    user-select: none; }
-  @media (max-width: 700px) {
-    .todos-title {
-      text-align: center; } }
+    user-select: none;
+    text-align: center; }
 
 .todos-form {
   /**
@@ -399,6 +392,7 @@ a:hover {
     opacity: .8; }
   .todos-filterBy__button.active {
     opacity: 1;
+    color: #6574CD;
     border-color: #B2B7FF; }
   .todos-filterBy__button:focus {
     outline: 0; }
@@ -538,7 +532,8 @@ a:hover {
     height: 1.5rem;
     width: 1.5rem;
     margin-top: .25rem;
-    margin-left: 1rem; }
+    margin-left: 1rem;
+    cursor: pointer; }
   .todos-todo__check--off {
     opacity: .5; }
   .todos-todo__active {

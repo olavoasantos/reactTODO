@@ -21896,12 +21896,16 @@ var Todo = function (_Component) {
         { className: 'todos-todo animated flipInX' },
         _react2.default.createElement(
           'span',
-          { className: item.isComplete ? 'todos-todo__active' : 'todos-todo__inactive' },
+          { onClick: function onClick() {
+              return _this2.complete();
+            }, className: item.isComplete ? 'todos-todo__active' : 'todos-todo__inactive' },
           _react2.default.createElement(_TodoCompletedIcon2.default, null)
         ),
         _react2.default.createElement(
           'span',
-          { className: item.isComplete ? 'todos-todo__inactive' : 'todos-todo__active' },
+          { onClick: function onClick() {
+              return _this2.complete();
+            }, className: item.isComplete ? 'todos-todo__inactive' : 'todos-todo__active' },
           _react2.default.createElement(_TodoIncompleteIcon2.default, null)
         ),
         _react2.default.createElement(
