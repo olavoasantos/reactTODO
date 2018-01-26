@@ -103,10 +103,10 @@
 
     // .todos-form__input.active
     &.active {
-      top: 0rem;
+      top: 0;
       left: 0;
       width: 636px;
-      height: 1.7rem;
+      height: 2rem;
       background: white;
       opacity: 1;
       transition: all 0.25s;

@@ -13,7 +13,7 @@ class TodoForm extends Component {
     /** Define os states */
     this.state = {
       input: '',
-      isActive: false
+      isActive: !false
     };
   }
 
