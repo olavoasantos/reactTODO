@@ -2,27 +2,53 @@
   & {
     display: flex;
     align-items: center;
-    border-top: 1px solid $grey-lighter;
+    border-bottom: 1px solid $grey-lighter;
+    @media (max-width: 700px) {
+      max-width: 100%;
+    }
   }
 
   &:hover {
     background-color: $grey-lightest
   }
 
+  &__check {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-top: .25rem;
+    margin-left: 1rem;
+  }
+
+  &__check--off {
+    opacity: .5;
+  }
+
+  & .todos-todo__active {
+    display: block;
+  }
+
+  & .todos-todo__inactive {
+    display: none;
+  }
+
+  &:hover &__destroy {
+    display: flex
+  }
   &__destroy {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    height: 2rem;
-    width: 2rem;
+    height: 3.4rem;
+    width: 3.4rem;
     background: $red;
     color: white;
-    margin-right:1rem;
-    border-radius: .25rem;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+
     cursor: pointer;
 
     &--icon {
-      height: 1rem;
+      font-size: 2rem
     }
   }
 
@@ -35,6 +61,7 @@
     height: 100%;
     cursor: pointer;
     user-select: none;
+    font-size: $font-size-md;
     padding: 1rem;
     margin: 0;
   }

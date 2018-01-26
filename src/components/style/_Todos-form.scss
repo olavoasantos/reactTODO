@@ -1,20 +1,82 @@
 .todos-form {
   
   & {
+    width: 640px;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    margin-top: 2rem;
+    left: 0;
+    @media (max-width: 700px) {
+      max-width: 100vw;
+    }
+  }
+
+  &.active .todos-form__add {
+    opacity: 0;
+    transition: all .25s;
+    transform: scale(0);
+  }
+
+  & .todos-form__add {
+    z-index: 1;
+    position: absolute;
+    top: -2.5rem;
+    right: -1rem;
+    font-size: $font-size-xl;
+    opacity: 1;
+    transform: scale(1);
+    transition: all .25s;
+    transition-delay: .25s;
+    width: 3rem;
+    height: 3rem;
+    color: $white;
+    background-color: $red;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    @media (max-width: 700px) {
+      right: 1rem;
+    }
+
+    cursor: pointer;
+    &:hover {
+      background-color: $red-light;
+    }
   }
 
   &__input {
-    width: 100%;
+    width: 0;
+    opacity: 0;
+    transition: all .25s;
+    position: absolute;
+    z-index: -1;
+    left:0rem;
+    top:0rem;
     padding: 1rem;
-    margin: 0 1rem;
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem;
-    border: 1px solid $grey;
+    width: 636px;
+    border-radius: .25rem;
+    height:0rem;
+    @media (max-width: 700px) {
+      max-width: 100vw;
+    }
+  }
+
+  &__input.active {
+    top:0rem;
+    left: 0;
+    width: 636px;
+    height: 1.7rem;
+    background: white;
+    opacity: 1;
+    transition: all .25s;
+    transition-delay: .25s;
+    z-index: 1;
+    @media (max-width: 700px) {
+      max-width: 100vw;
+    }
   }
 
   &__input:hover {

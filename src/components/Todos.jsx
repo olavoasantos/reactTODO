@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 import { setTodosFilter, setTodosOrder } from '../redux/actions';
 
 /** Componentes filhos */
-import Todo from './Children/Todo.jsx';
-import Form from './Children/TodoForm.jsx';
-import OrderTodos from './Children/OrderTodos.jsx';
-import FilterTodos from './Children/FilterTodos.jsx';
+import Todo from './children/Todo.jsx';
+import Form from './children/TodoForm.jsx';
+import OrderTodos from './children/OrderTodos.jsx';
+import FilterTodos from './children/FilterTodos.jsx';
 
 class Todos extends Component {
 
@@ -19,28 +19,27 @@ class Todos extends Component {
       <div className="todos">
         {/* Título */}
         <h1 className="todos-title">iTarefas</h1>
-        
-        {/* Formulário */}
-        <div className="todos-form">
-          <Form placeholder="Adicionar nova tarefa" />
-        </div>
 
         {/* Header */}
         <div className="todos-header">
+          {/* Formulário */}
+          <Form placeholder="Adicionar nova tarefa" />
+        </div>
+
+        <div className="todos-stats">
           {/* Filtrar lista */}
           <FilterTodos />
-        
           {/* Ordernar lista */}
           <OrderTodos />
         </div>
-        
+
         {/* Lista de tarefas */}
         <div className="todos-items">
-          {this.props.filtered.map(item => {
-            return (
+          {this.props.filtered.map(
+            item => (
               <Todo item={item} key={`todo-${item.id}`} />
-            );
-          })}
+            )
+          )}
         </div>
       </div>
     );
@@ -54,7 +53,9 @@ export default connect(
       list: state.list,
       order: state.order,
       filter: state.filter,
-      filtered: state.filtered
+      completed: state.completed,
+      incomplete: state.incomplete,
+      filtered: state.filtered,
     }
   },
   { setTodosFilter, setTodosOrder }

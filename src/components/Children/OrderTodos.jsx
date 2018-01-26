@@ -23,18 +23,11 @@ class OrderTodos extends Component {
   render() {
     return (
       <div className="todos-orderBy">
-        <span>Ordenar por: </span>
-        {/* Mais recentes */}
-        <button onClick={() => this.orderBy('DESC')}
-                className={(this.props.order==='DESC') ? 'todos-orderBy__button todos-orderBy__desc active' : 'todos-orderBy__button todos-orderBy__desc'}>
-          Mais recentes
-        </button>
-
-        {/* Mais antigas */}
-        <button onClick={() => this.orderBy('ASC')}
-                className={(this.props.order==='ASC') ? 'todos-orderBy__button todos-orderBy__asc active' : 'todos-orderBy__button todos-orderBy__asc'}>
-          Mais antigas
-        </button>
+        <select value={this.props.filter} className="todos-orderBy__select" onChange={(e) => this.orderBy(e.target.value)}>
+          <option disabled value="">Ordenar por</option>
+          <option value="ASC">Mais antigas</option>
+          <option value="DESC">Mais recentes</option>
+        </select>
       </div>
     );
   }

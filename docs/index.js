@@ -2020,7 +2020,7 @@ var _Todos = __webpack_require__(78);
 
 var _Todos2 = _interopRequireDefault(_Todos);
 
-__webpack_require__(84);
+__webpack_require__(86);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21287,61 +21287,79 @@ exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
-  var todos = void 0;
+  var todos = void 0,
+      orderedList = void 0;
   var storage = new _StorageWrapper2.default('todos');
   var store = storage.get() || {
     list: [],
     filtered: [],
     order: 'ASC',
-    filter: 'all'
+    filter: 'all',
+    completed: [],
+    incomplete: []
   };
 
   switch (action.type) {
     case 'ADD_TODO':
       todos = [].concat(_toConsumableArray(state.list), [(0, _Todo2.default)(action)]);
+      orderedList = (0, _ManageTodos2.default)(todos, state.order, state.filter);
       store = {
         list: todos,
         order: state.order,
         filter: state.filter,
-        filtered: (0, _ManageTodos2.default)(todos, state.order, state.filter)
+        completed: orderedList['completed'],
+        incomplete: orderedList['incomplete'],
+        filtered: orderedList[state.filter]
       };
       break;
 
     case 'DESTROY_TODO':
       todos = (0, _DestroyTodo2.default)(state.list, action);
+      orderedList = (0, _ManageTodos2.default)(todos, state.order, state.filter);
       store = {
         list: todos,
         order: state.order,
         filter: state.filter,
-        filtered: (0, _ManageTodos2.default)(todos, state.order, state.filter)
+        completed: orderedList['completed'],
+        incomplete: orderedList['incomplete'],
+        filtered: orderedList[state.filter]
       };
       break;
 
     case 'TOGGLE_TODO':
       todos = (0, _ToggleTodo2.default)(state.list, action);
+      orderedList = (0, _ManageTodos2.default)(todos, state.order, state.filter);
       store = {
         list: todos,
         order: state.order,
         filter: state.filter,
-        filtered: (0, _ManageTodos2.default)(todos, state.order, state.filter)
+        completed: orderedList['completed'],
+        incomplete: orderedList['incomplete'],
+        filtered: orderedList[state.filter]
       };
       break;
 
     case 'SET_TODOS_FILTER':
+      orderedList = (0, _ManageTodos2.default)(state.list, state.order, action.filter);
       store = {
         order: state.order,
         filter: action.filter,
         list: [].concat(_toConsumableArray(state.list)),
-        filtered: (0, _ManageTodos2.default)(state.list, state.order, action.filter)
+        completed: orderedList['completed'],
+        incomplete: orderedList['incomplete'],
+        filtered: orderedList[action.filter]
       };
       break;
 
     case 'SET_TODOS_ORDER':
+      orderedList = (0, _ManageTodos2.default)(state.list, action.order, state.filter);
       store = {
         order: action.order,
         filter: state.filter,
         list: [].concat(_toConsumableArray(state.list)),
-        filtered: (0, _ManageTodos2.default)(state.list, action.order, state.filter)
+        completed: orderedList['completed'],
+        incomplete: orderedList['incomplete'],
+        filtered: orderedList[state.filter]
       };
       break;
   }
@@ -21504,7 +21522,17 @@ var FilterTodos = function FilterTodos() {
   var list = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var filter = arguments[1];
 
-  return filters[filter](list);
+  var completed = [];
+  var incomplete = [];
+  list.forEach(function (item) {
+    item.isComplete ? completed.push(item) : incomplete.push(item);
+  });
+
+  return {
+    all: list,
+    completed: completed,
+    incomplete: incomplete
+  };
 };
 
 var filters = {
@@ -21654,15 +21682,15 @@ var _Todo = __webpack_require__(79);
 
 var _Todo2 = _interopRequireDefault(_Todo);
 
-var _TodoForm = __webpack_require__(81);
+var _TodoForm = __webpack_require__(83);
 
 var _TodoForm2 = _interopRequireDefault(_TodoForm);
 
-var _OrderTodos = __webpack_require__(82);
+var _OrderTodos = __webpack_require__(84);
 
 var _OrderTodos2 = _interopRequireDefault(_OrderTodos);
 
-var _FilterTodos = __webpack_require__(83);
+var _FilterTodos = __webpack_require__(85);
 
 var _FilterTodos2 = _interopRequireDefault(_FilterTodos);
 
@@ -21706,12 +21734,12 @@ var Todos = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'todos-form' },
+          { className: 'todos-header' },
           _react2.default.createElement(_TodoForm2.default, { placeholder: 'Adicionar nova tarefa' })
         ),
         _react2.default.createElement(
           'div',
-          { className: 'todos-header' },
+          { className: 'todos-stats' },
           _react2.default.createElement(_FilterTodos2.default, null),
           _react2.default.createElement(_OrderTodos2.default, null)
         ),
@@ -21734,6 +21762,8 @@ exports.default = (0, _reactRedux.connect)(function (state) {
     list: state.list,
     order: state.order,
     filter: state.filter,
+    completed: state.completed,
+    incomplete: state.incomplete,
     filtered: state.filtered
   };
 }, { setTodosFilter: _actions.setTodosFilter, setTodosOrder: _actions.setTodosOrder })(Todos);
@@ -21762,6 +21792,14 @@ var _actions = __webpack_require__(6);
 var _DeleteIcon = __webpack_require__(80);
 
 var _DeleteIcon2 = _interopRequireDefault(_DeleteIcon);
+
+var _TodoCompletedIcon = __webpack_require__(81);
+
+var _TodoCompletedIcon2 = _interopRequireDefault(_TodoCompletedIcon);
+
+var _TodoIncompleteIcon = __webpack_require__(82);
+
+var _TodoIncompleteIcon2 = _interopRequireDefault(_TodoIncompleteIcon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21828,7 +21866,17 @@ var Todo = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'todos-todo' },
+        { className: 'todos-todo animated flipInX' },
+        _react2.default.createElement(
+          'span',
+          { className: item.isComplete ? "todos-todo__active" : "todos-todo__inactive" },
+          _react2.default.createElement(_TodoCompletedIcon2.default, null)
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: item.isComplete ? "todos-todo__inactive" : "todos-todo__active" },
+          _react2.default.createElement(_TodoIncompleteIcon2.default, null)
+        ),
         _react2.default.createElement(
           'h2',
           { onClick: function onClick() {
@@ -21906,9 +21954,11 @@ var DeleteIcon = function (_Component) {
 
     /** render */
     value: function render() {
-      return _react2.default.createElement("img", { alt: "Deletar",
-        className: "todos-todo__destroy--icon",
-        src: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjEzNCAtMjMxLjUgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAxMzQgLTIzMS41IDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yMjMuNC0xMzEuNWwyNi4yLDM0Ny45YzIuNSwzMi41LDI5LjYsNTguMSw2MC43LDU4LjFoMTU5LjNjMzEuMSwwLDU4LjItMjUuNiw2MC43LTU4LjFsMjYuMy0zNDcuOUgyMjMuNHoNCgkgTTMyNC4xLDIyOS4zYzAuMyw3LjEtNS4xLDEyLjctMTIsMTIuN3MtMTIuNy01LjctMTMuMS0xMi43TDI4NC40LTY3LjNjLTAuNS05LjYsNS43LTE3LjQsMTMuOC0xNy40YzguMSwwLDE0LjksNy44LDE1LjMsMTcuNA0KCUwzMjQuMSwyMjkuM3ogTTQwMi41LDIyOS4zYzAsNy4xLTUuNywxMi43LTEyLjUsMTIuN3MtMTIuNS01LjctMTIuNS0xMi43bC0yLTI5Ni42Yy0wLjEtOS42LDYuNC0xNy40LDE0LjUtMTcuNHMxNC42LDcuOCwxNC41LDE3LjQNCglMNDAyLjUsMjI5LjN6IE00ODAuOSwyMjkuM2MtMC4zLDcuMS02LjIsMTIuNy0xMy4xLDEyLjdzLTEyLjItNS43LTEyLTEyLjdsMTAuNi0yOTYuNmMwLjMtOS42LDcuMi0xNy40LDE1LjMtMTcuNA0KCWM4LjEsMCwxNC4zLDcuOCwxMy44LDE3LjRMNDgwLjksMjI5LjN6Ii8+DQo8cGF0aCBpZD0iWE1MSURfMl8iIGNsYXNzPSJzdDAiIGQ9Ik01NzkuMy0xNDguN0gyMDAuN2wwLDBjLTEuOC0yMS4xLDEwLjctMzguNCwyNy45LTM4LjRoMzIyLjkNCglDNTY4LjYtMTg3LjEsNTgxLjEtMTY5LjcsNTc5LjMtMTQ4LjdMNTc5LjMtMTQ4Ljd6Ii8+DQo8cGF0aCBpZD0iWE1MSURfMV8iIGNsYXNzPSJzdDAiIGQ9Ik00NTguMy0xNzIuOUgzMjEuN2wtMC4yLTcuOGMtMC44LTI0LjUsMTQuNi00NC44LDM0LjQtNDQuOGg2OC4zYzE5LjcsMCwzNS4xLDIwLjMsMzQuNCw0NC43DQoJTDQ1OC4zLTE3Mi45eiIvPg0KPC9zdmc+DQo=" });
+      return _react2.default.createElement(
+        "span",
+        { className: "todos-todo__destroy--icon" },
+        "\xD7"
+      );
     }
   }]);
 
@@ -21919,6 +21969,112 @@ exports.default = DeleteIcon;
 
 /***/ }),
 /* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /** React */
+
+
+var TodoCompletedIcon = function (_Component) {
+  _inherits(TodoCompletedIcon, _Component);
+
+  function TodoCompletedIcon() {
+    _classCallCheck(this, TodoCompletedIcon);
+
+    return _possibleConstructorReturn(this, (TodoCompletedIcon.__proto__ || Object.getPrototypeOf(TodoCompletedIcon)).apply(this, arguments));
+  }
+
+  _createClass(TodoCompletedIcon, [{
+    key: "render",
+
+    /** render */
+    value: function render() {
+      return _react2.default.createElement("img", {
+        alt: "Completado",
+        className: "todos-todo__check todos-todo__check--on",
+        src: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaWQ9IkxheWVyXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEyOCAxMjg7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiMzMUFGOTE7fQoJLnN0MXtmaWxsOiNGRkZGRkY7fQo8L3N0eWxlPjxnPjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjY0IiBjeT0iNjQiIHI9IjY0Ii8+PC9nPjxnPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik01NC4zLDk3LjJMMjQuOCw2Ny43Yy0wLjQtMC40LTAuNC0xLDAtMS40bDguNS04LjVjMC40LTAuNCwxLTAuNCwxLjQsMEw1NSw3OC4xbDM4LjItMzguMiAgIGMwLjQtMC40LDEtMC40LDEuNCwwbDguNSw4LjVjMC40LDAuNCwwLjQsMSwwLDEuNEw1NS43LDk3LjJDNTUuMyw5Ny42LDU0LjcsOTcuNiw1NC4zLDk3LjJ6Ii8+PC9nPjwvc3ZnPg=="
+      });
+    }
+  }]);
+
+  return TodoCompletedIcon;
+}(_react.Component);
+
+exports.default = TodoCompletedIcon;
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /** React */
+
+
+var TodoIncompleteIcon = function (_Component) {
+  _inherits(TodoIncompleteIcon, _Component);
+
+  function TodoIncompleteIcon() {
+    _classCallCheck(this, TodoIncompleteIcon);
+
+    return _possibleConstructorReturn(this, (TodoIncompleteIcon.__proto__ || Object.getPrototypeOf(TodoIncompleteIcon)).apply(this, arguments));
+  }
+
+  _createClass(TodoIncompleteIcon, [{
+    key: "render",
+
+    /** render */
+    value: function render() {
+      return _react2.default.createElement("img", {
+        alt: "Incompleto",
+        className: "todos-todo__check todos-todo__check--off",
+        src: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9Ii01NyAtMzkuNSAxMjggMTI4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IC01NyAtMzkuNSAxMjggMTI4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojOTBBREE2O30NCjwvc3R5bGU+DQo8Y2lyY2xlIGNsYXNzPSJzdDAiIGN4PSI3IiBjeT0iMjQuNSIgcj0iNjQiLz4NCjwvc3ZnPg0K"
+      });
+    }
+  }]);
+
+  return TodoIncompleteIcon;
+}(_react.Component);
+
+exports.default = TodoIncompleteIcon;
+
+/***/ }),
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21959,7 +22115,10 @@ var TodoForm = function (_Component) {
     /** Define os states */
     var _this = _possibleConstructorReturn(this, (TodoForm.__proto__ || Object.getPrototypeOf(TodoForm)).call(this, props));
 
-    _this.state = { input: '' };
+    _this.state = {
+      input: '',
+      isActive: false
+    };
     return _this;
   }
 
@@ -22013,6 +22172,9 @@ var TodoForm = function (_Component) {
       if (e.key === 'Enter') {
         this.submit();
       }
+      if (e.key === 'Escape') {
+        this.input.blur();
+      }
     }
 
     /** render */
@@ -22022,18 +22184,41 @@ var TodoForm = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react2.default.createElement('input', {
-        type: 'text',
-        value: this.state.input,
-        className: 'todos-form__input',
-        onInput: function onInput(e) {
-          return _this2.onInput(e);
-        },
-        onKeyPress: function onKeyPress(e) {
-          return _this2.onKeypress(e);
-        },
-        placeholder: this.props.placeholder
-      });
+      return _react2.default.createElement(
+        'div',
+        { className: this.state.isActive ? "todos-form active" : "todos-form" },
+        _react2.default.createElement('input', {
+          autoFocus: true,
+          className: this.state.isActive ? "todos-form__input active" : "todos-form__input",
+          onInput: function onInput(e) {
+            return _this2.onInput(e);
+          },
+          ref: function ref(input) {
+            return _this2.input = input;
+          },
+          placeholder: this.props.placeholder,
+          type: 'text', value: this.state.input,
+          onKeyDown: function onKeyDown(e) {
+            return _this2.onKeypress(e);
+          },
+          onBlur: function onBlur() {
+            return _this2.setState({ isActive: false });
+          }
+        }),
+        _react2.default.createElement(
+          'span',
+          { className: 'todos-form__add', onClick: function onClick() {
+              return _this2.activate();
+            } },
+          '+'
+        )
+      );
+    }
+  }, {
+    key: 'activate',
+    value: function activate() {
+      this.setState({ isActive: true });
+      this.input.focus();
     }
   }]);
 
@@ -22043,7 +22228,7 @@ var TodoForm = function (_Component) {
 exports.default = (0, _reactRedux.connect)(null, { addTodo: _actions.addTodo })(TodoForm);
 
 /***/ }),
-/* 82 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22109,25 +22294,25 @@ var OrderTodos = function (_Component) {
         'div',
         { className: 'todos-orderBy' },
         _react2.default.createElement(
-          'span',
-          null,
-          'Ordenar por: '
-        ),
-        _react2.default.createElement(
-          'button',
-          { onClick: function onClick() {
-              return _this2.orderBy('DESC');
-            },
-            className: this.props.order === 'DESC' ? 'todos-orderBy__button todos-orderBy__desc active' : 'todos-orderBy__button todos-orderBy__desc' },
-          'Mais recentes'
-        ),
-        _react2.default.createElement(
-          'button',
-          { onClick: function onClick() {
-              return _this2.orderBy('ASC');
-            },
-            className: this.props.order === 'ASC' ? 'todos-orderBy__button todos-orderBy__asc active' : 'todos-orderBy__button todos-orderBy__asc' },
-          'Mais antigas'
+          'select',
+          { value: this.props.filter, className: 'todos-orderBy__select', onChange: function onChange(e) {
+              return _this2.orderBy(e.target.value);
+            } },
+          _react2.default.createElement(
+            'option',
+            { disabled: true, value: '' },
+            'Ordenar por'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: 'ASC' },
+            'Mais antigas'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: 'DESC' },
+            'Mais recentes'
+          )
         )
       );
     }
@@ -22143,7 +22328,7 @@ exports.default = (0, _reactRedux.connect)(function (state) {
 }, { setTodosOrder: _actions.setTodosOrder })(OrderTodos);
 
 /***/ }),
-/* 83 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22209,11 +22394,6 @@ var FilterTodos = function (_Component) {
         'div',
         { className: 'todos-filterBy' },
         _react2.default.createElement(
-          'div',
-          null,
-          'Exibir:'
-        ),
-        _react2.default.createElement(
           'button',
           { onClick: function onClick() {
               return _this2.filterBy('all');
@@ -22246,12 +22426,15 @@ var FilterTodos = function (_Component) {
 
 exports.default = (0, _reactRedux.connect)(function (state) {
   return {
-    filter: state.filter
+    list: state.list,
+    filter: state.filter,
+    completed: state.completed,
+    incomplete: state.incomplete
   };
 }, { setTodosFilter: _actions.setTodosFilter })(FilterTodos);
 
 /***/ }),
-/* 84 */
+/* 86 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

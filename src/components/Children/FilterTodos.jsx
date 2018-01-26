@@ -23,7 +23,7 @@ class FilterTodos extends Component {
   render() {
     return (
       <div className="todos-filterBy">
-        <div>Exibir:</div>
+        {/* <div>Exibir:</div> */}
 
         {/* Mostrar todas as tarefas */}
         <button onClick={() => this.filterBy('all')}
@@ -51,7 +51,10 @@ class FilterTodos extends Component {
 export default connect(
   state => {
     return {
+      list: state.list,
       filter: state.filter,
+      completed: state.completed,
+      incomplete: state.incomplete,
     }
   },
   { setTodosFilter }

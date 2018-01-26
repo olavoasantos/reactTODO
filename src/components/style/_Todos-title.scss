@@ -1,6 +1,12 @@
 .todos-title {
-  text-align: center;
   font-family: $font-title;
-  margin: 1rem auto;
-  font-size: $font-size-2xl;
+  margin: 0;
+  padding: 1rem;
+  color: $white;
+  background-color: $primary-dark;
+  border-bottom: 4px solid $primary-lightest;
+  user-select: none;
+  @media (max-width: 700px) {
+    text-align: center;
+  }
 }

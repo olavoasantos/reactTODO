@@ -1,10 +1,14 @@
 .todos-header {
+  width: 636px;
   display: flex;
-  padding: 1rem;
-  margin: 0 1rem;
+  padding: .8rem 1rem;
+  margin: 0 auto;
+  position: relative;
+  align-items: center;
   font-size: $font-size-sm;
-  justify-content: space-between;
-  border-left: 1px solid $grey;
-  border-right: 1px solid $grey-light;
-  background-color: $grey-lighter;
+  justify-content: center;
+
+  @media (max-width: 700px) {
+    max-width: 100vw;
+  }
 }

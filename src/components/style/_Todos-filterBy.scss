@@ -1,22 +1,45 @@
 .todos-filterBy {
-  
   & {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
     font-size: $font-size-sm;
+    margin-left: 1rem;
+    @media (max-width: 700px) {
+      flex: 1;
+      margin-left: -1rem;
+      padding: .8rem 0;
+    }
   }
 
   &__button {
-    font-size: $font-size-sm;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: $font-size-md;
     padding: .5rem;
-    margin: 0 .8rem;
+    border-bottom: 2px solid $grey-light;
+    position: relative;
+    opacity: .5;
+    cursor: pointer;
+    @media (max-width: 700px) {
+      flex: 1;
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__button:hover {
+    opacity: .8;
   }
 
   &__button.active {
-    font-weight: bold;
-    background-color: $primary-lightest;
-    color: $white;
+    opacity: 1;
+    border-color: $primary-lightest;
+  }
+
+  &__button:focus {
+    outline: 0
   }
 
 }

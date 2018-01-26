@@ -7,7 +7,19 @@
  * @param {String}  filter  Nome do filtro
  */
 const FilterTodos = (list = [], filter) => {
-  return filters[filter](list);
+  let completed = [];
+  let incomplete = [];
+  list.forEach(item => {
+    item.isComplete
+      ? completed.push(item)
+      : incomplete.push(item);
+  });
+
+  return {
+    all: list,
+    completed,
+    incomplete
+  }
 }
 
 const filters = {

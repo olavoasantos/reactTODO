@@ -1,9 +1,12 @@
 .todos-items {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: block;
   margin: 0 1rem;
-  border: 1px solid $grey-light;
-  border-bottom-left-radius: .25rem;
-  border-bottom-right-radius: .25rem;
+  height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-top: 1px solid $grey-light;
+  padding-top: 1rem;
+  @media (max-width: 700px) {
+    max-width: 100%;
+  }
 }

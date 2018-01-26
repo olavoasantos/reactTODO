@@ -56,11 +56,11 @@ describe('<Todos />', () => {
   it('adds a new todo list from the form', () => {
     expect( isEmpty(find('.todos-items')) ).toBe(true);
 
-    /** Sequência armazenada como função addTodo (ver abaixo) */
+    /** Sequência reproduzida como função addTodo (ver abaixo) */
     let input = find('.todos-form__input');
         type(input, 'New todo');
         press(input, 'Enter');
-
+        
     expect( isEmpty( find('.todos-items') ) ).toBe(false);
     expect( countChildren('.todos-items') ).toBe(1);
   });
@@ -111,11 +111,10 @@ describe('<Todos />', () => {
     expect( todos.contains("New Todo 3") ).toBe(true);
   });
   
-  it('sees a collection of order buttons', () => {
-    let oredering = find(".todos-orderBy__button");
+  it('sees an order by select input', () => {
+    let oredering = find(".todos-orderBy__select");
     
     expect( oredering.exists() ).toBeTruthy();
-    expect( count( oredering ) ).toBe(2);
   });
 
   it('orders the todos from oldest to newest by default', () => {
@@ -123,7 +122,7 @@ describe('<Todos />', () => {
     addTodo("Todo 2");
     addTodo("Todo 3");
 
-    let todos = find(".todos-todo");
+    let todos = find(".todos-todo__title");
     expect( todos.at(0).text() ).toBe("Todo 1")
     expect( todos.at(1).text() ).toBe("Todo 2")
     expect( todos.at(2).text() ).toBe("Todo 3")
@@ -134,9 +133,9 @@ describe('<Todos />', () => {
     addTodo("Todo 2");
     addTodo("Todo 3");
 
-    click(".todos-orderBy__desc");
-
-    let todos = find(".todos-todo");
+    selectOption(".todos-orderBy__select", 'DESC');
+    
+    let todos = find(".todos-todo__title");
     expect( todos.at(0).text() ).toBe("Todo 3")
     expect( todos.at(1).text() ).toBe("Todo 2")
     expect( todos.at(2).text() ).toBe("Todo 1")
@@ -147,10 +146,10 @@ describe('<Todos />', () => {
     addTodo("Todo 2");
     addTodo("Todo 3");
 
-    click(".todos-orderBy__desc");
-    click(".todos-orderBy__asc");
+    selectOption(".todos-orderBy__select", 'DESC');
+    selectOption(".todos-orderBy__select", 'ASC');
 
-    let todos = find(".todos-todo");
+    let todos = find(".todos-todo__title");
     expect( todos.at(0).text() ).toBe("Todo 1")
     expect( todos.at(1).text() ).toBe("Todo 2")
     expect( todos.at(2).text() ).toBe("Todo 3")
@@ -220,6 +219,12 @@ describe('<Todos />', () => {
     return el.exists();
   }
   
+  const selectOption = (el, value) => {
+    el = isString(el) ? wrapper.find(el) : el;
+
+    el.simulate("change", { target: { value }});
+  }
+  
   const classes = (el) => {
     el = isString(el) ? wrapper.find(el) : el;
     let list = el.html().match(/class=\"(.+)\"/);
@@ -247,7 +252,7 @@ describe('<Todos />', () => {
 
   const press = (el, key) => {
     el = isString(el) ? wrapper.find(el) : el;
-    el.simulate('keypress', { key });
+    el.simulate('keydown', { key });
   }
 
   const isEmpty = (el) => {

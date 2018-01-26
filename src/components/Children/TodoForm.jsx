@@ -11,7 +11,10 @@ class TodoForm extends Component {
     super(props);
 
     /** Define os states */
-    this.state = { input: '' };
+    this.state = {
+      input: '',
+      isActive: false
+    };
   }
 
   /**
@@ -54,20 +57,33 @@ class TodoForm extends Component {
     if(e.key === 'Enter') {
       this.submit();
     }
+    if(e.key === 'Escape') {
+      this.input.blur();
+    }
   }
 
   /** render */
   render() {
     return (
-      <input
-        type="text"
-        value={this.state.input}
-        className="todos-form__input"
-        onInput={(e) => this.onInput(e)}
-        onKeyPress={(e) => this.onKeypress(e)}
-        placeholder={this.props.placeholder}
-      />
+      <div className={this.state.isActive ? "todos-form active" : "todos-form"}>
+        <input 
+            autoFocus={true}
+            className={this.state.isActive ? "todos-form__input active" : "todos-form__input"}
+            onInput={(e) => this.onInput(e)}
+            ref={input => this.input = input}
+            placeholder={this.props.placeholder}
+            type="text" value={this.state.input}
+            onKeyDown={(e) => this.onKeypress(e)}
+            onBlur={() => this.setState({isActive: false})}
+        />
+        <span className="todos-form__add" onClick={() => this.activate()}>+</span>
+      </div>
     );
+  }
+
+  activate() {
+    this.setState({isActive: true});
+    this.input.focus();
   }
 
 }
