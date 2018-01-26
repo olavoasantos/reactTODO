@@ -22148,7 +22148,7 @@ var TodoForm = function (_Component) {
 
     _this.state = {
       input: '',
-      isActive: !false
+      isActive: false
     };
     return _this;
   }
