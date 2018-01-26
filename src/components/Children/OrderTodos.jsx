@@ -20,13 +20,14 @@ class OrderTodos extends Component {
     this.props.setTodosOrder(order);
   }
 
+  /** render */
   render() {
     return (
-      <div className="todos-orderBy">
-        <select value={this.props.filter} className="todos-orderBy__select" onChange={(e) => this.orderBy(e.target.value)}>
-          <option disabled value="">Ordenar por</option>
-          <option value="ASC">Mais antigas</option>
-          <option value="DESC">Mais recentes</option>
+      <div className='todos-orderBy'>
+        <select value={this.props.filter} className='todos-orderBy__select' onChange={(e) => this.orderBy(e.target.value)}>
+          <option disabled value=''>Ordenar por</option>
+          <option value='ASC'>Mais antigas</option>
+          <option value='DESC'>Mais recentes</option>
         </select>
       </div>
     );

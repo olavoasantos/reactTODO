@@ -1,7 +1,7 @@
 {
   "name": "itarefas",
   "version": "1.0.0",
-  "description": "Simple TODO list built with React.js",
+  "description": "Simple TODO list built with React.js and Redux",
   "homepage": "https://olavoasantos.github.io/itarefas",
   "main": "index.js",
   "scripts": {

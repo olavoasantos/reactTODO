@@ -39,15 +39,15 @@ class Todo extends Component {
     const { item } = this.props;
 
     return (
-      <div className="todos-todo animated flipInX">
+      <div className='todos-todo animated flipInX'>
 
         {/* Ícones de completo/não-completo */}
-        <span className={item.isComplete ? "todos-todo__active" : "todos-todo__inactive"}><TodoCompletedIcon /></span>
-        <span className={item.isComplete ? "todos-todo__inactive" : "todos-todo__active"}><TodoIncompleteIcon /></span>
+        <span className={item.isComplete ? 'todos-todo__active' : 'todos-todo__inactive'}><TodoCompletedIcon /></span>
+        <span className={item.isComplete ? 'todos-todo__inactive' : 'todos-todo__active'}><TodoIncompleteIcon /></span>
         
         {/* Título / botão de completar */}
         <h2 onClick={() => this.complete()}
-            className={item.isComplete ? "todos-todo__title complete" : "todos-todo__title"}>
+            className={item.isComplete ? 'todos-todo__title complete' : 'todos-todo__title'}>
           {
             (item.isComplete)
               ? <del>{item.title}</del>
@@ -56,7 +56,7 @@ class Todo extends Component {
         </h2>
 
         {/* Botão de deletar */}
-        <button className="todos-todo__destroy" onClick={() => this.destroy()}>
+        <button className='todos-todo__destroy' onClick={() => this.destroy()}>
           <DeleteIcon />
         </button>
       </div>

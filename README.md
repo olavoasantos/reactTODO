@@ -1,7 +1,6 @@
 # Lista de Tarefas
 Aplicação de anotação de tarefas construído com React.js e Redux.
 
-
 ## Demo
 [https://olavoasantos.github.io/itarefas/](https://olavoasantos.github.io/itarefas/)
 

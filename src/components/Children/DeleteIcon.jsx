@@ -6,7 +6,7 @@ class DeleteIcon extends Component {
   /** render */
   render() {
     return (
-      <span className="todos-todo__destroy--icon">&#215;</span>
+      <span className='todos-todo__destroy--icon'>&#215;</span>
     );
   }
 

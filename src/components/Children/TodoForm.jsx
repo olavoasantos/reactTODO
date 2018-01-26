@@ -85,7 +85,7 @@ class TodoForm extends Component {
   /** render */
   render() {
     return (
-      <div className={this.state.isActive ? "todos-form active" : "todos-form"}>
+      <div className={this.state.isActive ? 'todos-form active' : 'todos-form'}>
 
         {/* Input */}
         <input 
@@ -93,13 +93,13 @@ class TodoForm extends Component {
             onInput={(e) => this.onInput(e)}
             ref={input => this.input = input}
             placeholder={this.props.placeholder}
-            type="text" value={this.state.input}
+            type='text' value={this.state.input}
             onKeyDown={(e) => this.onKeypress(e)}
-            className={this.state.isActive ? "todos-form__input active" : "todos-form__input"}
+            className={this.state.isActive ? 'todos-form__input active' : 'todos-form__input'}
         />
 
         {/* Botão de adição */}
-        <span className="todos-form__add" onClick={() => this.activate()}>+</span>
+        <span className='todos-form__add' onClick={() => this.activate()}>+</span>
         
       </div>
     );

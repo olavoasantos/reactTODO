@@ -21896,12 +21896,12 @@ var Todo = function (_Component) {
         { className: 'todos-todo animated flipInX' },
         _react2.default.createElement(
           'span',
-          { className: item.isComplete ? "todos-todo__active" : "todos-todo__inactive" },
+          { className: item.isComplete ? 'todos-todo__active' : 'todos-todo__inactive' },
           _react2.default.createElement(_TodoCompletedIcon2.default, null)
         ),
         _react2.default.createElement(
           'span',
-          { className: item.isComplete ? "todos-todo__inactive" : "todos-todo__active" },
+          { className: item.isComplete ? 'todos-todo__inactive' : 'todos-todo__active' },
           _react2.default.createElement(_TodoIncompleteIcon2.default, null)
         ),
         _react2.default.createElement(
@@ -21909,7 +21909,7 @@ var Todo = function (_Component) {
           { onClick: function onClick() {
               return _this2.complete();
             },
-            className: item.isComplete ? "todos-todo__title complete" : "todos-todo__title" },
+            className: item.isComplete ? 'todos-todo__title complete' : 'todos-todo__title' },
           item.isComplete ? _react2.default.createElement(
             'del',
             null,
@@ -21974,15 +21974,15 @@ var DeleteIcon = function (_Component) {
   }
 
   _createClass(DeleteIcon, [{
-    key: "render",
+    key: 'render',
 
 
     /** render */
     value: function render() {
       return _react2.default.createElement(
-        "span",
-        { className: "todos-todo__destroy--icon" },
-        "\xD7"
+        'span',
+        { className: 'todos-todo__destroy--icon' },
+        '\xD7'
       );
     }
   }]);
@@ -22028,15 +22028,15 @@ var TodoCompletedIcon = function (_Component) {
   }
 
   _createClass(TodoCompletedIcon, [{
-    key: "render",
+    key: 'render',
 
 
     /** render */
     value: function render() {
-      return _react2.default.createElement("img", {
-        alt: "Completado",
-        className: "todos-todo__check todos-todo__check--on",
-        src: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaWQ9IkxheWVyXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEyOCAxMjg7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiMzMUFGOTE7fQoJLnN0MXtmaWxsOiNGRkZGRkY7fQo8L3N0eWxlPjxnPjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjY0IiBjeT0iNjQiIHI9IjY0Ii8+PC9nPjxnPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik01NC4zLDk3LjJMMjQuOCw2Ny43Yy0wLjQtMC40LTAuNC0xLDAtMS40bDguNS04LjVjMC40LTAuNCwxLTAuNCwxLjQsMEw1NSw3OC4xbDM4LjItMzguMiAgIGMwLjQtMC40LDEtMC40LDEuNCwwbDguNSw4LjVjMC40LDAuNCwwLjQsMSwwLDEuNEw1NS43LDk3LjJDNTUuMyw5Ny42LDU0LjcsOTcuNiw1NC4zLDk3LjJ6Ii8+PC9nPjwvc3ZnPg=="
+      return _react2.default.createElement('img', {
+        alt: 'Completado',
+        className: 'todos-todo__check todos-todo__check--on',
+        src: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaWQ9IkxheWVyXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEyOCAxMjg7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiMzMUFGOTE7fQoJLnN0MXtmaWxsOiNGRkZGRkY7fQo8L3N0eWxlPjxnPjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjY0IiBjeT0iNjQiIHI9IjY0Ii8+PC9nPjxnPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik01NC4zLDk3LjJMMjQuOCw2Ny43Yy0wLjQtMC40LTAuNC0xLDAtMS40bDguNS04LjVjMC40LTAuNCwxLTAuNCwxLjQsMEw1NSw3OC4xbDM4LjItMzguMiAgIGMwLjQtMC40LDEtMC40LDEuNCwwbDguNSw4LjVjMC40LDAuNCwwLjQsMSwwLDEuNEw1NS43LDk3LjJDNTUuMyw5Ny42LDU0LjcsOTcuNiw1NC4zLDk3LjJ6Ii8+PC9nPjwvc3ZnPg=='
       });
     }
   }]);
@@ -22082,15 +22082,15 @@ var TodoIncompleteIcon = function (_Component) {
   }
 
   _createClass(TodoIncompleteIcon, [{
-    key: "render",
+    key: 'render',
 
 
     /** render */
     value: function render() {
-      return _react2.default.createElement("img", {
-        alt: "Incompleto",
-        className: "todos-todo__check todos-todo__check--off",
-        src: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9Ii01NyAtMzkuNSAxMjggMTI4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IC01NyAtMzkuNSAxMjggMTI4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojOTBBREE2O30NCjwvc3R5bGU+DQo8Y2lyY2xlIGNsYXNzPSJzdDAiIGN4PSI3IiBjeT0iMjQuNSIgcj0iNjQiLz4NCjwvc3ZnPg0K"
+      return _react2.default.createElement('img', {
+        alt: 'Incompleto',
+        className: 'todos-todo__check todos-todo__check--off',
+        src: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9Ii01NyAtMzkuNSAxMjggMTI4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IC01NyAtMzkuNSAxMjggMTI4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojOTBBREE2O30NCjwvc3R5bGU+DQo8Y2lyY2xlIGNsYXNzPSJzdDAiIGN4PSI3IiBjeT0iMjQuNSIgcj0iNjQiLz4NCjwvc3ZnPg0K'
       });
     }
   }]);
@@ -22239,7 +22239,7 @@ var TodoForm = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: this.state.isActive ? "todos-form active" : "todos-form" },
+        { className: this.state.isActive ? 'todos-form active' : 'todos-form' },
         _react2.default.createElement('input', {
           onBlur: function onBlur() {
             return _this2.deactivate();
@@ -22255,7 +22255,7 @@ var TodoForm = function (_Component) {
           onKeyDown: function onKeyDown(e) {
             return _this2.onKeypress(e);
           },
-          className: this.state.isActive ? "todos-form__input active" : "todos-form__input"
+          className: this.state.isActive ? 'todos-form__input active' : 'todos-form__input'
         }),
         _react2.default.createElement(
           'span',
@@ -22331,6 +22331,9 @@ var OrderTodos = function (_Component) {
 
       this.props.setTodosOrder(order);
     }
+
+    /** render */
+
   }, {
     key: 'render',
     value: function render() {
@@ -22429,6 +22432,9 @@ var FilterTodos = function (_Component) {
 
       this.props.setTodosFilter(filter);
     }
+
+    /** render */
+
   }, {
     key: 'render',
     value: function render() {

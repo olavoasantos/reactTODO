@@ -20,9 +20,10 @@ class FilterTodos extends Component {
     this.props.setTodosFilter(filter);
   }
 
+  /** render */
   render() {
     return (
-      <div className="todos-filterBy">
+      <div className='todos-filterBy'>
         {/* <div>Exibir:</div> */}
 
         {/* Mostrar todas as tarefas */}

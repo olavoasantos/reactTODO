@@ -16,17 +16,17 @@ class Todos extends Component {
   /** render */
   render() {
     return (
-      <div className="todos">
+      <div className='todos'>
         {/* Título */}
-        <h1 className="todos-title">iTarefas</h1>
+        <h1 className='todos-title'>iTarefas</h1>
 
         {/* Header */}
-        <div className="todos-header">
+        <div className='todos-header'>
           {/* Formulário */}
-          <Form placeholder="Adicionar nova tarefa" />
+          <Form placeholder='Adicionar nova tarefa' />
         </div>
 
-        <div className="todos-controls">
+        <div className='todos-controls'>
           {/* Filtrar lista */}
           <FilterTodos />
           {/* Ordernar lista */}
@@ -34,7 +34,7 @@ class Todos extends Component {
         </div>
 
         {/* Lista de tarefas */}
-        <div className="todos-items">
+        <div className='todos-items'>
           {this.props.filtered.map(
             item => (
               <Todo item={item} key={`todo-${item.id}`} />
