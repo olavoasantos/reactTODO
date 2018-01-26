@@ -1,3 +1,8 @@
+/**
+ * Esse é apenas um wrapper do localStorage
+ * para facilitar a * syntaxe e deixar
+ * o código mais legível.
+ */
 class StorageWrapper {
 
   constructor(name) {
@@ -34,6 +39,15 @@ class StorageWrapper {
    */
   remove() {
     localStorage.removeItem(this.name);
+  }
+
+  /**
+   * clear
+   * ---
+   * Limpa os dados armazenados no localStorage.
+   */
+  clear() {
+    localStorage.clear();
   }
 
 }

@@ -3,7 +3,7 @@
  * ---
  * Adiciona um novo objeto tarefa à lista de tarefas.
  * 
- * @param {Object}  title Título da tarefa
+ * @param {String}  title Título da tarefa
  */
 export const addTodo = (title) => {
   return {
@@ -12,6 +12,13 @@ export const addTodo = (title) => {
   };
 }
 
+/**
+ * destroyTodo
+ * ---
+ * Remove um objeto tarefa da lista.
+ * 
+ * @param {Number} id Identificador do objeto tarefa
+ */
 export const destroyTodo = (id) => {
   return {
     type: 'DESTROY_TODO',
@@ -24,7 +31,7 @@ export const destroyTodo = (id) => {
  * ---
  * Inverte o estado de uma tarefa entre completa e não-completa.
  * 
- * @param {Object}  completedItem  Objeto tarefa
+ * @param {Number}  completedItem  Identificador do objeto tarefa
  */
 export const toggleTodo = (id) => {
   return {
@@ -33,6 +40,13 @@ export const toggleTodo = (id) => {
   };
 }
 
+/**
+ * setTodosFilter
+ * ---
+ * Define o filtro a ser aplicado pelo sistema.
+ * 
+ * @param {String} filter Nome do filtro
+ */
 export const setTodosFilter = (filter) => {
   return {
     type: 'SET_TODOS_FILTER',
@@ -40,6 +54,13 @@ export const setTodosFilter = (filter) => {
   };
 }
 
+/**
+ * setTodosOrder
+ * ---
+ * Define a direção de ordenação da lista ( ASC|DESC ).
+ * 
+ * @param {String} order Direção da ordenação
+ */
 export const setTodosOrder = (order) => {
   return {
     type: 'SET_TODOS_ORDER',

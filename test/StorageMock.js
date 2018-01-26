@@ -1,8 +1,13 @@
 /**
- * Solução em
+ * StorageMock
+ * ---
+ * localStorage não existe no ambiente de teste. Para codigos
+ * que fazem uso dessa ferramenta, é necessário a criação
+ * de uma estrutura que simule seu comportamento.
+ * 
+ * Solução encontrada em:
  * https://github.com/facebook/jest/issues/2098
  */
-
 var localStorageMock = (function() {
   var store = {};
 

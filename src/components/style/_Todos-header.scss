@@ -1,14 +1,29 @@
-.todos-header {
-  width: 636px;
-  display: flex;
-  padding: .8rem 1rem;
-  margin: 0 auto;
-  position: relative;
-  align-items: center;
-  font-size: $font-size-sm;
-  justify-content: center;
 
+.todos-header {
+
+  /**
+   *  .todos-header
+   *  ---
+   *  Estilo do cabeçalho.
+   */
+  & {
+    width: 636px;
+    display: flex;
+    padding: .8rem 1rem;
+    margin: 0 auto;
+    position: relative;
+    align-items: center;
+    font-size: $font-size-sm;
+    justify-content: center;
+  }
+
+  /**
+   *  .todos-header @below 700px
+   *  ---
+   *  Adaptação para telas menores
+   */
   @media (max-width: 700px) {
     max-width: 100vw;
   }
+
 }

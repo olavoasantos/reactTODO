@@ -1,12 +1,28 @@
+
 .todos-title {
-  font-family: $font-title;
-  margin: 0;
-  padding: 1rem;
-  color: $white;
-  background-color: $primary-dark;
-  border-bottom: 4px solid $primary-lightest;
-  user-select: none;
+
+  /**
+   *  .todos-title
+   *  ---
+   *  Estilo do título.
+   */
+  & {
+    font-family: $font-title;
+    margin: 0;
+    padding: 1rem;
+    color: $white;
+    background-color: $primary-dark;
+    border-bottom: 4px solid $primary-lightest;
+    user-select: none;
+  }
+
+  /**
+   *  .todos-title
+   *  ---
+   *  Adaptação para telas menores.
+   */
   @media (max-width: 700px) {
     text-align: center;
   }
+
 }

@@ -1,4 +1,12 @@
+
 .todos-filterBy {
+
+  /**
+   *  .todos-filterBy
+   *  ---
+   *  Estilo principal do elemento de
+   *  filtros do componente.
+   */
   & {
     display: flex;
     flex-wrap: wrap;
@@ -6,40 +14,58 @@
     justify-content: space-between;
     font-size: $font-size-sm;
     margin-left: 1rem;
-    @media (max-width: 700px) {
-      flex: 1;
-      margin-left: -1rem;
-      padding: .8rem 0;
-    }
   }
 
+  /**
+   *  .todos-filterBy @below 700px
+   *  ---
+   *  Ajuste do estilo para telas menores
+   */
+  @media (max-width: 700px) {
+    flex: 1;
+    margin-left: -1rem;
+    padding: .8rem 0;
+  }
+
+  /**
+   *  .todos-filterBy__button
+   *  ---
+   *  Estilo dos botões de filtro.
+   */
   &__button {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    font-size: $font-size-md;
-    padding: .5rem;
-    border-bottom: 2px solid $grey-light;
-    position: relative;
-    opacity: .5;
-    cursor: pointer;
+    
+    // .todos-filterBy__button
+    & {
+      display: flex;
+      justify-content: center;
+      opacity: .5;
+      padding: .5rem;
+      cursor: pointer;
+      font-size: $font-size-md;
+      border-bottom: 2px solid $grey-light;
+    }
+
+    // .todos-filterBy__button @below 700px
     @media (max-width: 700px) {
       flex: 1;
       font-size: $font-size-sm;
     }
-  }
+    
+    // .todos-filterBy__button:hover
+    &:hover {
+      opacity: .8;
+    }
 
-  &__button:hover {
-    opacity: .8;
-  }
-
-  &__button.active {
-    opacity: 1;
-    border-color: $primary-lightest;
-  }
-
-  &__button:focus {
-    outline: 0
+    // .todos-filterBy__button.active
+    &.active {
+      opacity: 1;
+      border-color: $primary-lightest;
+    }
+  
+    // .todos-filterBy__button:focus
+    &:focus {
+      outline: 0
+    }
   }
 
 }

@@ -21,12 +21,12 @@ import Todos from './components/Todos.jsx';
 import './components/style/Todos.scss';
 
 /**
- * Inicializar Redux
+ * Inicialização Redux
  */
 const store = createStore( Reducers );
 
 /**
- * Inicializar React.js no DOM
+ * Inicialização React.js no DOM
  */
 ReactDOM.render(
   <Provider store={store}>

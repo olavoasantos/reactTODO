@@ -26,7 +26,7 @@ class Todos extends Component {
           <Form placeholder="Adicionar nova tarefa" />
         </div>
 
-        <div className="todos-stats">
+        <div className="todos-controls">
           {/* Filtrar lista */}
           <FilterTodos />
           {/* Ordernar lista */}

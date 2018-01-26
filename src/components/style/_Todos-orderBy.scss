@@ -1,28 +1,53 @@
+
 .todos-orderBy {
   
+  /**
+   *  .todos-orederBy
+   *  ---
+   *  Estilo da sessão que contém
+   *  os botões de ordenação.
+   */
   & {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    font-size: $font-size-sm;
+    justify-content: space-between;
     padding: .8rem 0;
     margin-right: 1rem;
-    @media (max-width: 700px) {
-      display: none;
-    }
-  }
-
-  &__select {
-    padding: .5rem;
-    margin-left: .8rem;
-    border-radius: .25rem;
-    border: 1px solid $grey-light;
     font-size: $font-size-sm;
   }
 
-  &__select:focus {
-    outline:0;
-    border-color: $primary-lightest;
+  /**
+   *  .todos-orderBy @below 700px
+   *  ---
+   *  Adaptação para telas menores.
+   */
+  @media (max-width: 700px) {
+    display: none;
   }
+
+  /**
+   *  .todos-orederBy__select
+   *  ---
+   *  Estilo do input <select>.
+   */
+  &__select {
+
+    // .todos-orederBy__select
+    & {
+      padding: .5rem;
+      margin-left: .8rem;
+      border-radius: .25rem;
+      border: 1px solid $grey-light;
+      font-size: $font-size-sm;
+    }
+    
+    // .todos-orederBy__select:focus
+    &:focus {
+      outline:0;
+      border-color: $primary-lightest;
+    }
+
+  }
+
 
 }

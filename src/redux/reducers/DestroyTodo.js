@@ -1,7 +1,7 @@
 /**
  * DestroyTodo
  * ---
- * Remove uma tarefa da lista de tarefas
+ * Remove uma tarefa da lista de tarefas.
  * 
  * @param {Object}  item.id  Identificador da tarefa
  */

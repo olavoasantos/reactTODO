@@ -17,7 +17,7 @@ class Todo extends Component {
    * ---
    * Emite um evento para marcar um Objeto tarefa como completada ou não.
    * O evento é emitido acionando a função passada pelo prop 'complete'
-   * à qual é passado o Objeto tarefa a ser modificado.
+   * à qual é passado o identificador do Objeto tarefa.
    */
   complete() {
     this.props.toggleTodo( this.props.item.id );
@@ -28,7 +28,7 @@ class Todo extends Component {
    * ---
    * Emite um evento para remover um Objeto tarefa da lista principal. O
    * evento é emitido acionando a função passada pelo prop 'destroy'
-   * à qual é passado o Objeto tarefa a ser destruído
+   * à qual é passado o identificador do Objeto tarefa.
    */
   destroy() {
     this.props.destroyTodo(this.props.item.id);
@@ -40,8 +40,12 @@ class Todo extends Component {
 
     return (
       <div className="todos-todo animated flipInX">
+
+        {/* Ícones de completo/não-completo */}
         <span className={item.isComplete ? "todos-todo__active" : "todos-todo__inactive"}><TodoCompletedIcon /></span>
         <span className={item.isComplete ? "todos-todo__inactive" : "todos-todo__active"}><TodoIncompleteIcon /></span>
+        
+        {/* Título / botão de completar */}
         <h2 onClick={() => this.complete()}
             className={item.isComplete ? "todos-todo__title complete" : "todos-todo__title"}>
           {
@@ -50,6 +54,8 @@ class Todo extends Component {
               : <span>{item.title}</span>
           }
         </h2>
+
+        {/* Botão de deletar */}
         <button className="todos-todo__destroy" onClick={() => this.destroy()}>
           <DeleteIcon />
         </button>
@@ -60,10 +66,6 @@ class Todo extends Component {
 }
 
 export default connect(
-  state => {
-    return {
-      list: state.list
-    }
-  },
+  state => { return { list: state.list } },
   { destroyTodo, toggleTodo }
 )( Todo );

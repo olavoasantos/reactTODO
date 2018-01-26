@@ -62,28 +62,47 @@ class TodoForm extends Component {
     }
   }
 
+  /**
+   * activate
+   * ---
+   * Altera o estado do formulário para ativo
+   * e foca no input.
+   */
+  activate() {
+    this.setState({ isActive: true });
+    this.input.focus();
+  }
+
+  /**
+   * deactivate
+   * ---
+   * Altera o estado do formulário para desativo.
+   */
+  deactivate() {
+    this.setState({ isActive: false });
+  }
+
   /** render */
   render() {
     return (
       <div className={this.state.isActive ? "todos-form active" : "todos-form"}>
+
+        {/* Input */}
         <input 
-            autoFocus={true}
-            className={this.state.isActive ? "todos-form__input active" : "todos-form__input"}
+            onBlur={() => this.deactivate()}
             onInput={(e) => this.onInput(e)}
             ref={input => this.input = input}
             placeholder={this.props.placeholder}
             type="text" value={this.state.input}
             onKeyDown={(e) => this.onKeypress(e)}
-            onBlur={() => this.setState({isActive: false})}
+            className={this.state.isActive ? "todos-form__input active" : "todos-form__input"}
         />
+
+        {/* Botão de adição */}
         <span className="todos-form__add" onClick={() => this.activate()}>+</span>
+        
       </div>
     );
-  }
-
-  activate() {
-    this.setState({isActive: true});
-    this.input.focus();
   }
 
 }

@@ -1,17 +1,41 @@
+
 .todos-todo {
+  
+  /**
+   *  .todos-todo
+   *  ---
+   *  Estilo do elemento tarefas.
+   */
   & {
     display: flex;
     align-items: center;
     border-bottom: 1px solid $grey-lighter;
-    @media (max-width: 700px) {
-      max-width: 100%;
-    }
+  }
+  
+  /**
+   *  .todos-todo
+   *  ---
+   *  Adaptação para telas menores.
+   */
+  @media (max-width: 700px) {
+    max-width: 100%;
   }
 
+  /**
+   *  .todos-todo:hover
+   *  ---
+   *  Estilo do elemento tarefas quando
+   *  o mouse está em cima.
+   */
   &:hover {
     background-color: $grey-lightest
   }
 
+  /**
+   *  .todos-todo__check
+   *  ---
+   *  Estilo do ícone de tarefas.
+   */
   &__check {
     height: 1.5rem;
     width: 1.5rem;
@@ -19,55 +43,108 @@
     margin-left: 1rem;
   }
 
+  /**
+   *  .todos-todo__check--off
+   *  ---
+   *  Estilo do ícone de tarefas
+   *  não completadas.
+   */
   &__check--off {
     opacity: .5;
   }
 
-  & .todos-todo__active {
+  /**
+   *  .todos-todo__active
+   *  ---
+   *  Estilo do wrapper dos ícones de
+   *  tarefas ativos.
+   */
+  &__active {
     display: block;
   }
 
-  & .todos-todo__inactive {
+  /**
+   *  .todos-todo__inactive
+   *  ---
+   *  Estilo do wrapper dos ícones de
+   *  tarefas inativos.
+   */
+  &__inactive {
     display: none;
   }
 
+  /**
+   *  .todos-todo:hover .todos-todo__destroy
+   *  ---
+   *  Estilo do botão de deletar quando o mouse
+   *  entra no elemento .todos-todo.
+   */
   &:hover &__destroy {
     display: flex
   }
+
+  /**
+   *  .todos-todo__destroy
+   *  ---
+   *  Estilo do botão de deletar.
+   */
   &__destroy {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    height: 3.4rem;
-    width: 3.4rem;
-    background: $red;
-    color: white;
-    border-top-right-radius: .25rem;
-    border-bottom-right-radius: .25rem;
 
-    cursor: pointer;
-
-    &--icon {
-      font-size: 2rem
+    // .todos-todo__destroy
+    & {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      height: 3.4rem;
+      width: 3.4rem;
+      background: $red;
+      color: white;
+      border-top-right-radius: .25rem;
+      border-bottom-right-radius: .25rem;
+      cursor: pointer;
     }
+
+    // .todos-todo__destroy:hover
+    &:hover {
+      background-color: $red-light;
+    }
+
   }
 
-  &__destroy:hover {
-    background-color: $red-light;
+  /**
+   *  .todos-todo__destroy--icon
+   *  ---
+   *  Estilo do ícone de deletar.
+   */
+  &__destroy--icon {
+    font-size: 2rem
   }
 
+
+  /**
+   *  .todos-todo__title
+   *  ---
+   *  Estilo do título das tarefas.
+   */
   &__title {
-    flex:1;
-    height: 100%;
-    cursor: pointer;
-    user-select: none;
-    font-size: $font-size-md;
-    padding: 1rem;
-    margin: 0;
+
+    // .todos-todo__title
+    & {
+      flex:1;
+      height: 100%;
+      user-select: none;
+      font-size: $font-size-md;
+      margin: 0;
+      padding: 1rem;
+      cursor: pointer;
+    }
+    
+    // .todos-todo__title.complete
+    &.complete {
+      color: $grey;
+      text-decoration: line-through
+    }
+
   }
 
-  &__title.complete {
-    color: $grey;
-    text-decoration: line-through
-  }
 }

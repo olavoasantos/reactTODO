@@ -1,7 +1,17 @@
+/**
+ *  Variáveis globais
+ */
 @import 'variables';
 
+/**
+ * Normalização de inputs, html, body e definição
+ * de estilos não relacionados ao componente.
+ */
 @import 'reset';
 
+/**
+ *  Estilos do componentes
+ */
 @import 'Todos';
 @import 'Todos-title';
 @import 'Todos-form';
@@ -10,5 +20,4 @@
 @import 'Todos-orderBy';
 @import 'Todos-items';
 @import 'Todos-todo';
-@import 'Todos-stats';
-@import 'Todos-count';
+@import 'Todos-controls';

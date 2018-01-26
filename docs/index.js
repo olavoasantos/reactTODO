@@ -501,7 +501,7 @@ Object.defineProperty(exports, "__esModule", {
  * ---
  * Adiciona um novo objeto tarefa à lista de tarefas.
  * 
- * @param {Object}  title Título da tarefa
+ * @param {String}  title Título da tarefa
  */
 var addTodo = exports.addTodo = function addTodo(title) {
   return {
@@ -510,6 +510,13 @@ var addTodo = exports.addTodo = function addTodo(title) {
   };
 };
 
+/**
+ * destroyTodo
+ * ---
+ * Remove um objeto tarefa da lista.
+ * 
+ * @param {Number} id Identificador do objeto tarefa
+ */
 var destroyTodo = exports.destroyTodo = function destroyTodo(id) {
   return {
     type: 'DESTROY_TODO',
@@ -522,7 +529,7 @@ var destroyTodo = exports.destroyTodo = function destroyTodo(id) {
  * ---
  * Inverte o estado de uma tarefa entre completa e não-completa.
  * 
- * @param {Object}  completedItem  Objeto tarefa
+ * @param {Number}  completedItem  Identificador do objeto tarefa
  */
 var toggleTodo = exports.toggleTodo = function toggleTodo(id) {
   return {
@@ -531,6 +538,13 @@ var toggleTodo = exports.toggleTodo = function toggleTodo(id) {
   };
 };
 
+/**
+ * setTodosFilter
+ * ---
+ * Define o filtro a ser aplicado pelo sistema.
+ * 
+ * @param {String} filter Nome do filtro
+ */
 var setTodosFilter = exports.setTodosFilter = function setTodosFilter(filter) {
   return {
     type: 'SET_TODOS_FILTER',
@@ -538,6 +552,13 @@ var setTodosFilter = exports.setTodosFilter = function setTodosFilter(filter) {
   };
 };
 
+/**
+ * setTodosOrder
+ * ---
+ * Define a direção de ordenação da lista ( ASC|DESC ).
+ * 
+ * @param {String} order Direção da ordenação
+ */
 var setTodosOrder = exports.setTodosOrder = function setTodosOrder(order) {
   return {
     type: 'SET_TODOS_ORDER',
@@ -2025,7 +2046,7 @@ __webpack_require__(86);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Inicializar Redux
+ * Inicialização Redux
  */
 
 
@@ -2035,7 +2056,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var store = (0, _redux.createStore)(_reducers2.default);
 
 /**
- * Inicializar React.js no DOM
+ * Inicialização React.js no DOM
  */
 
 
@@ -21411,13 +21432,14 @@ Object.defineProperty(exports, "__esModule", {
  * ---
  * Inverte o estado de uma tarefa entre completa e não-completa.
  * 
- * @param {Object}  item.id  Identificador da tarefa
+ * @param {Array}   list      Lista de tarefas
+ * @param {Object}  item.id   Identificador da tarefa
  */
 var ToggleTodo = function ToggleTodo() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var list = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var item = arguments[1];
 
-  return state.map(function (todo) {
+  return list.map(function (todo) {
     if (todo.id === item.id) {
       todo.isComplete = !todo.isComplete;
     }
@@ -21441,7 +21463,7 @@ Object.defineProperty(exports, "__esModule", {
 /**
  * DestroyTodo
  * ---
- * Remove uma tarefa da lista de tarefas
+ * Remove uma tarefa da lista de tarefas.
  * 
  * @param {Object}  item.id  Identificador da tarefa
  */
@@ -21482,8 +21504,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 /**
  * ManageTodos
  * ---
- * @param {Object}  list  Lista de tarefas
- * @param {String}  order  Direção da ordenação
+ * Responsável por gerenciar o filtro e ordenação
+ * da lista de tarefas.
+ *
+ * @param {Array}   list    Lista de tarefas
+ * @param {String}  order   Direção da ordenação
  * @param {String}  filter  Nome do filtro
  */
 var ManageTodos = function ManageTodos() {
@@ -21514,41 +21539,23 @@ Object.defineProperty(exports, "__esModule", {
  * FilterTodos
  * ---
  * Filtra os ítens de acordo com o estado 'filter'.
- * 
- * @param {Object}  list  Lista de tarefas
+ *
+ * @param {Array}  list  Lista de tarefas
  * @param {String}  filter  Nome do filtro
  */
 var FilterTodos = function FilterTodos() {
   var list = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var filter = arguments[1];
 
-  var completed = [];
-  var incomplete = [];
+  var completed = [],
+      incomplete = [];
+
+  // Classifica as tarefas entre as completas e as incompletas
   list.forEach(function (item) {
     item.isComplete ? completed.push(item) : incomplete.push(item);
   });
 
-  return {
-    all: list,
-    completed: completed,
-    incomplete: incomplete
-  };
-};
-
-var filters = {
-  all: function all(list) {
-    return list;
-  },
-  completed: function completed(list) {
-    return list.filter(function (item) {
-      return item.isComplete;
-    });
-  },
-  incomplete: function incomplete(list) {
-    return list.filter(function (item) {
-      return !item.isComplete;
-    });
-  }
+  return { all: list, completed: completed, incomplete: incomplete };
 };
 
 exports.default = FilterTodos;
@@ -21576,6 +21583,9 @@ var OrderTodos = function OrderTodos() {
   return sort[order](list);
 };
 
+/**
+ * Funções de ordenação de cada direção.
+ */
 var sort = {
   ASC: function ASC(list) {
     return list;
@@ -21602,6 +21612,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * Esse é apenas um wrapper do localStorage
+ * para facilitar a * syntaxe e deixar
+ * o código mais legível.
+ */
 var StorageWrapper = function () {
   function StorageWrapper(name) {
     _classCallCheck(this, StorageWrapper);
@@ -21649,6 +21664,18 @@ var StorageWrapper = function () {
     key: "remove",
     value: function remove() {
       localStorage.removeItem(this.name);
+    }
+
+    /**
+     * clear
+     * ---
+     * Limpa os dados armazenados no localStorage.
+     */
+
+  }, {
+    key: "clear",
+    value: function clear() {
+      localStorage.clear();
     }
   }]);
 
@@ -21739,7 +21766,7 @@ var Todos = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'todos-stats' },
+          { className: 'todos-controls' },
           _react2.default.createElement(_FilterTodos2.default, null),
           _react2.default.createElement(_OrderTodos2.default, null)
         ),
@@ -21834,7 +21861,7 @@ var Todo = function (_Component) {
      * ---
      * Emite um evento para marcar um Objeto tarefa como completada ou não.
      * O evento é emitido acionando a função passada pelo prop 'complete'
-     * à qual é passado o Objeto tarefa a ser modificado.
+     * à qual é passado o identificador do Objeto tarefa.
      */
     value: function complete() {
       this.props.toggleTodo(this.props.item.id);
@@ -21845,7 +21872,7 @@ var Todo = function (_Component) {
      * ---
      * Emite um evento para remover um Objeto tarefa da lista principal. O
      * evento é emitido acionando a função passada pelo prop 'destroy'
-     * à qual é passado o Objeto tarefa a ser destruído
+     * à qual é passado o identificador do Objeto tarefa.
      */
 
   }, {
@@ -21908,9 +21935,7 @@ var Todo = function (_Component) {
 }(_react.Component);
 
 exports.default = (0, _reactRedux.connect)(function (state) {
-  return {
-    list: state.list
-  };
+  return { list: state.list };
 }, { destroyTodo: _actions.destroyTodo, toggleTodo: _actions.toggleTodo })(Todo);
 
 /***/ }),
@@ -22005,6 +22030,7 @@ var TodoCompletedIcon = function (_Component) {
   _createClass(TodoCompletedIcon, [{
     key: "render",
 
+
     /** render */
     value: function render() {
       return _react2.default.createElement("img", {
@@ -22057,6 +22083,7 @@ var TodoIncompleteIcon = function (_Component) {
 
   _createClass(TodoIncompleteIcon, [{
     key: "render",
+
 
     /** render */
     value: function render() {
@@ -22177,6 +22204,32 @@ var TodoForm = function (_Component) {
       }
     }
 
+    /**
+     * activate
+     * ---
+     * Altera o estado do formulário para ativo
+     * e foca no input.
+     */
+
+  }, {
+    key: 'activate',
+    value: function activate() {
+      this.setState({ isActive: true });
+      this.input.focus();
+    }
+
+    /**
+     * deactivate
+     * ---
+     * Altera o estado do formulário para desativo.
+     */
+
+  }, {
+    key: 'deactivate',
+    value: function deactivate() {
+      this.setState({ isActive: false });
+    }
+
     /** render */
 
   }, {
@@ -22188,8 +22241,9 @@ var TodoForm = function (_Component) {
         'div',
         { className: this.state.isActive ? "todos-form active" : "todos-form" },
         _react2.default.createElement('input', {
-          autoFocus: true,
-          className: this.state.isActive ? "todos-form__input active" : "todos-form__input",
+          onBlur: function onBlur() {
+            return _this2.deactivate();
+          },
           onInput: function onInput(e) {
             return _this2.onInput(e);
           },
@@ -22201,9 +22255,7 @@ var TodoForm = function (_Component) {
           onKeyDown: function onKeyDown(e) {
             return _this2.onKeypress(e);
           },
-          onBlur: function onBlur() {
-            return _this2.setState({ isActive: false });
-          }
+          className: this.state.isActive ? "todos-form__input active" : "todos-form__input"
         }),
         _react2.default.createElement(
           'span',
@@ -22213,12 +22265,6 @@ var TodoForm = function (_Component) {
           '+'
         )
       );
-    }
-  }, {
-    key: 'activate',
-    value: function activate() {
-      this.setState({ isActive: true });
-      this.input.focus();
     }
   }]);
 
@@ -22322,9 +22368,7 @@ var OrderTodos = function (_Component) {
 }(_react.Component);
 
 exports.default = (0, _reactRedux.connect)(function (state) {
-  return {
-    order: state.order
-  };
+  return { order: state.order };
 }, { setTodosOrder: _actions.setTodosOrder })(OrderTodos);
 
 /***/ }),

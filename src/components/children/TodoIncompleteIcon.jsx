@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 
 class TodoIncompleteIcon extends Component {
+
   /** render */
   render() {
     return (
@@ -12,6 +13,7 @@ class TodoIncompleteIcon extends Component {
       />
     );
   }
+  
 }
 
 export default TodoIncompleteIcon;

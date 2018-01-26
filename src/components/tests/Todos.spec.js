@@ -201,66 +201,112 @@ describe('<Todos />', () => {
     click(".todos-filterBy__all");
     expect( countChildren(".todos-items") ).toBe(3);
   });
+
+  /**
+   * Helper functions
+   * ---
+   * Algumas funções para facilitar os testes
+   * e deixar o código mais legível.
+   * ---
+   */
   
-  // Helpers
+  /**
+   * addTodo - Adiciona uma nova tarefa.
+   * @param {String} title Título da tarefa
+   */
   const addTodo = (title) => {
     let input = find('.todos-form__input');
         type(input, title);
         press(input, 'Enter');
   }
 
+  /**
+   * find - Busca elementos no DOM.
+   * @param   {String} el Seletor
+   * @returns {Node}  Elemento do DOM
+   */
   const find = (el) => {
     return wrapper.find(el);
   }
   
+  /**
+   * see - Checa para ver se o elemento existe.
+   * @param   {String|Node} el Selector|Elemento
+   * @returns {bool}
+   */
   const see = (el) => {
     el = isString(el) ? wrapper.find(el) : el;
 
     return el.exists();
   }
   
+  /**
+   * selectOption - Seleciona uma opção de um <select>.
+   * @param {String|Node} el Selector|Elemento
+   * @param {*} value 
+   */
   const selectOption = (el, value) => {
     el = isString(el) ? wrapper.find(el) : el;
 
     el.simulate("change", { target: { value }});
   }
   
-  const classes = (el) => {
-    el = isString(el) ? wrapper.find(el) : el;
-    let list = el.html().match(/class=\"(.+)\"/);
-    
-    return list ? list[1].split(" ") : null;
-  }
-  
+  /**
+   * count - Conta quanto elementos existem com esse selector.
+   * @param   {String|Node} el Selector|Elemento
+   * @returns {Number}  Número de Nodes
+   */
   const count = (el) => {
     el = isString(el) ? wrapper.find(el) : el;
 
     return el.length;
   }
 
+  /**
+   * click - Simula um click em um elemento.
+   * @param {String|Node} el Selector|Elemento
+   */
   const click = (el) => {
     el = isString(el) ? wrapper.find(el) : el;
     el.simulate('click');
   }
 
+  /**
+   * type - Simula a entrada de dados em um <input>.
+   * @param {String|Node}   el    Selector|Elemento
+   * @param {String|Number} value Input digitado
+   */
   const type = (el, value) => {
     el = isString(el) ? wrapper.find(el) : el;
-    el.simulate('input', {
-      target: {value}
-    });
+    el.simulate('input', { target: {value} });
   }
 
+  /**
+   * press - Simula uma decla sendo apertada (evento keydown).
+   * @param {String|Node} el    Selector|Elemento
+   * @param {String}      key   Nome da tecla apertada
+   */
   const press = (el, key) => {
     el = isString(el) ? wrapper.find(el) : el;
     el.simulate('keydown', { key });
   }
 
+  /**
+   * isEmpty - Verifica se um elemento não possui filhos.
+   * @param   {String|Node}   el  Selector|Elemento
+   * @returns {bool}
+   */
   const isEmpty = (el) => {
     el = isString(el) ? wrapper.find(el) : el;
     
     return el.children().length === 0;
   }
 
+  /**
+   * countChildren - Conta o número de filhos que um elemento possui.
+   * @param   {String|Node}   el  Selector|Elemento
+   * @returns {Number}  Número de filhos
+   */
   const countChildren = (el) => {
     el = isString(el) ? wrapper.find(el) : el;
     

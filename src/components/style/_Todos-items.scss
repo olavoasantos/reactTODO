@@ -1,12 +1,29 @@
+
 .todos-items {
-  display: block;
-  margin: 0 1rem;
-  height: 70vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border-top: 1px solid $grey-light;
-  padding-top: 1rem;
+
+  /**
+   *  .todos-items
+   *  ---
+   *  Estilo da sessão que
+   *  contém as tarefas.
+   */
+  & {
+    display: block;
+    margin: 0 1rem;
+    height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top: 1px solid $grey-light;
+    padding-top: 1rem;
+  }
+  
+  /**
+   *  .todos-items
+   *  ---
+   *  Adaptação para telas menores.
+   */
   @media (max-width: 700px) {
     max-width: 100%;
   }
+
 }

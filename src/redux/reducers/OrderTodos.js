@@ -8,6 +8,9 @@ const OrderTodos = (list = [], order) => {
   return sort[order](list);
 }
 
+/**
+ * Funções de ordenação de cada direção.
+ */
 const sort = {
   ASC: list => list,
   DESC: list => list.reverse()

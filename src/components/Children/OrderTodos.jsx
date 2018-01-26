@@ -35,10 +35,6 @@ class OrderTodos extends Component {
 }
 
 export default connect(
-  state => {
-    return {
-      order: state.order,
-    }
-  },
+  state => { return { order: state.order, } },
   { setTodosOrder }
 )( OrderTodos );
