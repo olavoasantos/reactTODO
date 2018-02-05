@@ -21757,7 +21757,7 @@ var Todos = function (_Component) {
         _react2.default.createElement(
           'h1',
           { className: 'todos-title' },
-          'iTarefas'
+          'Lista de Tarefas'
         ),
         _react2.default.createElement(
           'div',
