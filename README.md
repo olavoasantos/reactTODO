@@ -2,7 +2,7 @@
 Aplicação de anotação de tarefas construído com React.js e Redux.
 
 ## Demo
-[https://olavoasantos.github.io/itarefas/](https://olavoasantos.github.io/itarefas/)
+[https://olavoasantos.github.io/reactTODO/](https://olavoasantos.github.io/reactTODO/)
 
 ## Estrutura de pastas
 * __/docs__ Contém a versão empacotada pelo webpack

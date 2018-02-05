@@ -18,7 +18,7 @@ class Todos extends Component {
     return (
       <div className='todos'>
         {/* Título */}
-        <h1 className='todos-title'>iTarefas</h1>
+        <h1 className='todos-title'>Lista de Tarefas</h1>
 
         {/* Header */}
         <div className='todos-header'>
